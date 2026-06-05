@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/*
+  Re-skin Fumadocs to match nevoflux-www (src/styles/global.css).
+  We override Fumadocs' design tokens (--color-fd-*) with the NevoFlux
+  teal/cyan palette and set Bricolage Grotesque as the UI font.
+  Dark mode is class-based (.dark, added by next-themes) — the visual result
+  mirrors nevoflux-www's [data-theme="dark"].
+*/
+
+@theme {
+  --font-sans: 'Bricolage Grotesque', system-ui, sans-serif;
+
+  /* Light theme — maps to --nevo-* light values */
+  --color-fd-background: #ffffff;
+  --color-fd-foreground: #0f172a;
+  --color-fd-muted: #f3f4f6;
+  --color-fd-muted-foreground: #475569;
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #0f172a;
+  --color-fd-card: #f3f4f6;
+  --color-fd-card-foreground: #0f172a;
+  --color-fd-border: #e2e8f0;
+  --color-fd-primary: #1a6b6b;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-secondary: #f3f4f6;
+  --color-fd-secondary-foreground: #0f172a;
+  --color-fd-accent: #e6f4f4;
+  --color-fd-accent-foreground: #15585a;
+  --color-fd-ring: #1a6b6b;
+}
+
+.dark {
+  /* Dark theme — maps to --nevo-* dark values */
+  --color-fd-background: #0b1120;
+  --color-fd-foreground: #e2e8f0;
+  --color-fd-muted: #1e293b;
+  --color-fd-muted-foreground: #94a3b8;
+  --color-fd-popover: #0f172a;
+  --color-fd-popover-foreground: #e2e8f0;
+  --color-fd-card: #1e293b;
+  --color-fd-card-foreground: #e2e8f0;
+  --color-fd-border: #1e293b;
+  --color-fd-primary: #2ec4b6;
+  --color-fd-primary-foreground: #0b1120;
+  --color-fd-secondary: #1e293b;
+  --color-fd-secondary-foreground: #e2e8f0;
+  --color-fd-accent: #15292b;
+  --color-fd-accent-foreground: #4dd9d9;
+  --color-fd-ring: #2ec4b6;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
