@@ -39,11 +39,6 @@ export function baseOptions(locale: string): BaseLayoutProps {
         url: `/${locale}/docs`,
         active: 'nested-url',
       },
-      {
-        text: locale === 'zh' ? '官网' : 'Website',
-        url: siteUrl,
-        external: true,
-      },
     ],
   };
 }
