@@ -6,7 +6,8 @@ import { join } from 'node:path';
 
 const DEFAULT_LOCALE = 'en';
 const OUT_DIR = 'out';
-const target = `/${DEFAULT_LOCALE}/`;
+// There is no marketing home page — send the root straight to the docs.
+const target = `/${DEFAULT_LOCALE}/docs`;
 
 const html = `<!doctype html>
 <html lang="${DEFAULT_LOCALE}">

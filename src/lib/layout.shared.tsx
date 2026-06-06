@@ -29,7 +29,8 @@ export function baseOptions(locale: string): BaseLayoutProps {
           {appName}
         </>
       ),
-      url: `/${locale}`,
+      // Logo / title links back to the main marketing site, not the docs home.
+      url: siteUrl,
     },
     githubUrl,
     links: [
