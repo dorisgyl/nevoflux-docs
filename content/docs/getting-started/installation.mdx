@@ -1,19 +1,41 @@
 ---
 title: Installation
-description: Download and install NevoFlux on your operating system.
+description: Download and install the NevoFlux browser. The agent is bundled in.
 ---
 
-NevoFlux is available for Windows, macOS, and Linux.
+NevoFlux is distributed as a desktop browser for Windows, macOS, and Linux.
+Download the latest build from the
+[GitHub releases page](https://github.com/dorisgyl/nevoflux/releases).
 
-## Download
+## Downloads by platform
 
-Grab the latest build from the [releases page](https://github.com/dorisgyl/nevoflux/releases/latest)
-and pick the asset that matches your operating system and CPU architecture.
+| Platform | Artifact |
+| --- | --- |
+| **Windows** (x64 / ARM64) | Installer `.exe` (NSIS) |
+| **macOS** (Apple Silicon + Intel) | Universal `.dmg` |
+| **Linux** (x86_64 / aarch64) | `.tar.xz` archive, or an `.AppImage` |
 
-## Platform notes
+After the first install, NevoFlux keeps itself up to date automatically.
 
-- **Windows** — run the installer and follow the prompts.
-- **macOS** — open the `.dmg` and drag NevoFlux to Applications.
-- **Linux** — use the provided AppImage or distribution package.
+## The agent is included
 
-> Detailed, per-platform instructions are coming soon.
+The AI agent (the local background process that powers the sidebar) is **bundled
+inside the browser**. On first launch the browser registers and starts it for you.
+For normal use you do **not** need to install or run anything separately.
+
+## After installing
+
+1. Launch NevoFlux.
+2. Press **`Ctrl+Shift+A`** (**`Cmd+Shift+A`** on macOS) to open the AI sidebar.
+3. On first run the sidebar shows a short setup screen — continue to
+   [Configure an AI model](/docs/getting-started/configure-ai-model).
+
+> **AI features need an API key.** The browser installs cleanly without one, but the
+> agent cannot answer until you configure a model and provide its key.
+
+## Build from source (developers)
+
+The browser builds with **Node.js 22+**, npm, and Python 3; the agent is a Rust
+workspace (toolchain **1.91.0**). See the
+[browser repo](https://github.com/dorisgyl/nevoflux) and
+[agent repo](https://github.com/dorisgyl/nevoflux-agent) for build instructions.

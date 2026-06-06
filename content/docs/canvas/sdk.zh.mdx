@@ -1,0 +1,58 @@
+---
+title: NevoFlux SDK
+description: Canvas 应用内可用的 JavaScript API —— 智能体、存储、事件、工具、分享。
+---
+
+每个 Canvas 制品运行时都会注入一个全局 **`window.NevofluxSDK`**。通过它,你的应用可以
+与智能体对话、持久化数据、收发事件、运行白名单工具,并进行分享 —— 全部经由通往宿主的
+安全消息通道。
+
+## API 一览
+
+| 命名空间 | 方法 |
+| --- | --- |
+| *(根)* | `callTool(action, params)` |
+| `agent` | `chat(message, options)`、`cancel(sessionId)`、`sendCommand(command, params)` |
+| `sidebar` | `open()`、`send(message)`、`notify(type, data)` |
+| `storage` | `get(key)`、`set(key, value)`、`delete(key)`、`query(prefix)` |
+| `system` | `getInfo()` |
+| `events` | `subscribe(patterns, handler, options)`、`publish(topic, data, options)`、`history(topic, options)`、`waitFor(pattern, options)`、`recover()` |
+| `tool` | `list(options)`、`invoke(toolName, params, options)` |
+| `share` | `share(artifactId, options)`、`import(shareId, password)`、`extend(shareId, secs)`、`delete(shareId)`、`list()` |
+
+### `agent.chat(message, options)`
+
+以流式方式从智能体获取回复。`options` 可包含 `sessionId`、`attachments`,以及回调
+`onStream`、`onToolResult`、`onState`。解析为 `{ text, toolResults, sessionId }`。
+
+## 示例
+
+```javascript
+// 1) 询问智能体并把答案流式写入界面
+const result = await NevofluxSDK.agent.chat("总结当前标签页", {
+  onStream: (c) => { output.textContent += c.delta; },
+  onState:  (s) => { status.textContent = s.status; },
+});
+console.log(result.text);
+
+// 2) 为该制品持久化少量状态
+await NevofluxSDK.storage.set("count", "1");
+const count = await NevofluxSDK.storage.get("count");
+
+// 3) 发现并运行一个白名单工具,流式接收其事件
+const { tools } = await NevofluxSDK.tool.list();
+const { callId } = await NevofluxSDK.tool.invoke(
+  "ffmpeg.probe",
+  { input: "/clip.mp4" },
+  { timeoutMs: 10000, onEvent: (e) => console.log(e.event_type, e) }
+);
+
+// 4) 响应 NevoFlux 其他位置发来的事件
+const sub = NevofluxSDK.events.subscribe(["session:*"], (evt) => {
+  console.log("event", evt);
+});
+// 用完后 sub.unsubscribe()
+```
+
+> `tool.invoke` 能运行哪些工具由[工具白名单](/zh/docs/canvas/tool-whitelist)控制。
+> 对已禁用或未列入的工具的调用会被拒绝。

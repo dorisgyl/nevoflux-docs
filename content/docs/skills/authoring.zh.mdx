@@ -1,0 +1,67 @@
+---
+title: 编写技能
+description: 编写你自己的技能 —— 文件格式、frontmatter 与目录结构。
+---
+
+技能就是一个 Markdown 文件。最简单的起步方式是让智能体来做:
+`/skill-creator 帮我做一个用于……的技能`。你也可以手写。
+
+## 技能存放位置
+
+把你的技能放进用户技能目录:
+
+| 平台 | 路径 |
+| --- | --- |
+| Linux | `~/.config/nevoflux/skills/` |
+| macOS | `~/Library/Application Support/nevoflux/skills/` |
+| Windows | `%APPDATA%\nevoflux\skills\` |
+
+支持两种布局:
+
+- 单文件:`skills/my-skill.md`
+- 文件夹(有资源时用):`skills/my-skill/SKILL.md`
+
+同名的用户技能会覆盖内置技能。
+
+## 格式
+
+```markdown
+---
+name: my-skill
+description: >-
+  这个技能做什么、何时使用。这是主要的触发依据 —— 要具体、稍微"强势"一点,
+  以便智能体在恰当时机想到它。
+triggers: ["release notes", "更新日志"]
+allowed_tools: ["web_fetch", "tool_search"]
+---
+
+# My skill
+
+给智能体的分步说明:做什么、按什么顺序做、如何呈现结果。
+```
+
+### Frontmatter 字段
+
+| 字段 | 用途 |
+| --- | --- |
+| `name` | kebab-case 标识(默认取文件名) |
+| `description` | 主要触发依据;它做什么、何时使用 |
+| `triggers` | 可选的额外触发短语 |
+| `allowed_tools` | 技能所需工具(加载前会检查) |
+| `dependencies` | 一并加载的其他技能 / 约定文件 |
+| `tags`、`version`、`enabled` | 可选元数据 |
+
+## 文件夹结构(用于随附资源)
+
+```text
+my-skill/
+  SKILL.md       # 必需:frontmatter + 说明
+  scripts/       # 可运行的辅助脚本
+  references/    # 按需加载的额外文档
+  assets/        # 模板、图标、字体
+```
+
+保持 `SKILL.md` 精炼;把详尽内容移入 `references/`,使其仅在需要时加载。
+
+> 把必须加载的参考文件声明为 `dependencies`,以确保它们被可靠注入 —— 包括当本轮在
+> 外部 CLI/agent 提供商上运行时。

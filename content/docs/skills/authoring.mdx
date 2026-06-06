@@ -1,0 +1,69 @@
+---
+title: Authoring Skills
+description: Write your own skill — the file format, frontmatter, and folder layout.
+---
+
+A skill is just a Markdown file. The easiest way to start is to ask the agent:
+`/skill-creator help me build a skill that …`. You can also write one by hand.
+
+## Where skills live
+
+Put your skill in your user skills directory:
+
+| Platform | Path |
+| --- | --- |
+| Linux | `~/.config/nevoflux/skills/` |
+| macOS | `~/Library/Application Support/nevoflux/skills/` |
+| Windows | `%APPDATA%\nevoflux\skills\` |
+
+Two layouts are supported:
+
+- A single file: `skills/my-skill.md`
+- A folder (use this when you have resources): `skills/my-skill/SKILL.md`
+
+A user skill overrides a built-in skill of the same name.
+
+## Format
+
+```markdown
+---
+name: my-skill
+description: >-
+  What this skill does and when to use it. This is the main trigger — be specific
+  and a little pushy so the agent reaches for it at the right time.
+triggers: ["release notes", "changelog"]
+allowed_tools: ["web_fetch", "tool_search"]
+---
+
+# My skill
+
+Step-by-step instructions for the agent: what to do, in what order, and how to
+present the result.
+```
+
+### Frontmatter fields
+
+| Field | Purpose |
+| --- | --- |
+| `name` | kebab-case id (defaults to the filename) |
+| `description` | The primary trigger; what it does and when to use it |
+| `triggers` | Optional extra phrases that should activate it |
+| `allowed_tools` | Tools the skill needs (checked before it loads) |
+| `dependencies` | Other skills / convention files to load alongside it |
+| `tags`, `version`, `enabled` | Optional metadata |
+
+## Folder layout (for bundled resources)
+
+```text
+my-skill/
+  SKILL.md       # required: frontmatter + instructions
+  scripts/       # runnable helper scripts
+  references/    # extra docs loaded on demand
+  assets/        # templates, icons, fonts
+```
+
+Keep `SKILL.md` focused; move deep detail into `references/` so it loads only when
+needed.
+
+> Declare any must-load reference files as `dependencies` so they are injected
+> reliably, including when the turn runs on an external CLI/agent provider.

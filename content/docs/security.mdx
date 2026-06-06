@@ -1,16 +1,40 @@
 ---
-title: Security
-description: How NevoFlux handles your data and security.
+title: Security & Privacy
+description: How NevoFlux handles your data, keys, and the agent's permissions.
 ---
 
-We take the security and privacy of your browsing seriously.
+## Where your data lives
+
+NevoFlux is local-first. Your **sessions**, **knowledge base** (`~/.gbrain/`),
+**config**, and **API keys** are stored on your own machine. The agent runs as a
+local process bundled with the browser.
+
+What leaves your machine: the requests you send to your chosen **LLM provider** go to
+that provider, and any **MCP servers** or **web tools** you use reach their
+respective endpoints.
+
+## API keys
+
+Keys live in `config.toml` or in environment variables — NevoFlux does **not** use an
+OS keychain. Treat `config.toml` as a secret file and avoid committing it anywhere.
+
+## The agent asks before it acts
+
+By default the agent runs in **Confirm before actions** mode: it asks for your
+approval before running tools or commands. You can opt into **Auto-execute** in
+[Settings → General](/docs/settings/general) — do so deliberately.
+
+## Tool and command safety
+
+- **Canvas tools** run through a [whitelist](/docs/canvas/tool-whitelist): no shell,
+  validated parameters, path confinement, output/time limits, and an audit log.
+- **Command auto-approval** is governed by the `[auth]` section of
+  [`config.toml`](/docs/configuration), including an allowlist and patterns for
+  sensitive files.
+- **Canvas artifacts** run in a sandboxed iframe, and the bridge between page content
+  and the browser is isolated.
 
 ## Reporting a vulnerability
 
-If you discover a security issue, please report it responsibly via our
+Please report security issues responsibly via the
 [GitHub repository](https://github.com/dorisgyl/nevoflux).
-
-## Data handling
-
-A full description of what data the agent accesses and how it is stored is in
-progress.

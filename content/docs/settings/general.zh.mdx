@@ -1,0 +1,36 @@
+---
+title: General(常规)
+description: 侧边栏行为、智能体执行模式、数据路径,以及智能体的人设文件。
+---
+
+**General** 标签页控制侧边栏与智能体的行为,并让你塑造智能体的人设。
+
+## 侧边栏与智能体(Sidebar & Agent)
+
+| 设置 | 选项 | 作用 |
+| --- | --- | --- |
+| **Sidebar default** | 自动打开 / 仅手动 | 侧边栏是否自动打开 |
+| **Agent execution** | 操作前确认 / 自动执行 | 智能体每次操作前是否询问 |
+| **Data storage** | 路径 | 制品与会话数据的存放位置(如 `~/.config/nevoflux/`) |
+
+*示例:* 将 **Agent execution** 切换为 **Auto-execute**,可让智能体执行多步任务而无需
+对每个操作确认。这些设置即时保存。
+
+## 人设("灵魂")文件
+
+五个 Markdown 卡片让你塑造智能体是谁、它对你和你的环境了解什么。点击
+**Save All Settings** 时,每个卡片会保存到你配置目录下的一个文件:
+
+| 卡片 | 文件 | 用途 |
+| --- | --- | --- |
+| **Identity** | `IDENTITY.md` | 智能体的名字、性格、气质(以及**头像**) |
+| **Soul** | `SOUL.md` | 核心价值观与行为准则 |
+| **User** | `USER.md` | 关于*你*的信息(姓名、称谓、时区、背景) |
+| **Tools** | `TOOLS.md` | 你的环境(SSH 主机、设备、TTS 偏好) |
+| **Agents Runtime** | `AGENTS.md` | 运行时指令、记忆规则、安全协议 |
+
+*示例:* 在 **User** 中粘贴一段简短自我介绍和你的时区,然后 **Save All Settings** ——
+智能体会据此为你定制回答。在 **Identity** 中设定名字和性格,可让助手拥有一致的口吻。
+
+> 这些文件还参与 NevoFlux 的[自学习](/zh/docs/features/automation)系统,随时间推移
+> 它可能会提议对其进行更新。

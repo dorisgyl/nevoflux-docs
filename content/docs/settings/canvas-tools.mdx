@@ -1,0 +1,34 @@
+---
+title: Canvas Tools
+description: Manage the tool whitelist that Canvas apps and the agent are allowed to run.
+---
+
+The **Canvas Tools** tab manages NevoFlux's **tool whitelist** — the set of external
+commands and internal APIs that [Canvas](/docs/canvas) apps (and the agent) may
+invoke. Tools are defined in TOML.
+
+## The list
+
+Each tool shows a **source** badge:
+
+- `builtin` — ships with NevoFlux
+- `user` — one you created
+- `mcp` / `canvas` / `wasm` — provided by other subsystems
+- `overridden` — a builtin you replaced
+
+Every tool has an **enable** toggle. Only **`user`** tools have **Edit** / **Delete**
+buttons.
+
+## Add a tool
+
+Click **+ New Canvas Tool** to open a TOML editor pre-filled with a template. Define
+the tool (name, what it wraps, parameters, constraints) and **Save**. It appears with
+a `user` badge, and your apps and the agent can call it.
+
+*Example:* wrap a shell binary as a `command` tool restricted to a few safe
+sub-commands. User tools are stored as `.toml` files in
+`~/.config/nevoflux/canvas-tools/`.
+
+For the complete TOML schema (parameter types, `args_mode`, constraints, the
+`{{param}}` template syntax, the three-layer Builtin/User/Session precedence, and
+security model), see **[Canvas → Tool whitelist](/docs/canvas/tool-whitelist)**.

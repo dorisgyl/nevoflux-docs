@@ -1,0 +1,42 @@
+---
+title: MCP 集成
+description: 在 NevoFlux 中使用外部 MCP 工具,并把 NevoFlux 暴露给其他 MCP 客户端。
+---
+
+NevoFlux 在两个方向上都支持 **Model Context Protocol(MCP)**。
+
+## 接入外部 MCP 服务器
+
+在[设置 → MCP Servers](/zh/docs/settings/mcp-servers)中添加 MCP 服务器(stdio / SSE /
+HTTP)。它们的工具会提供给智能体,智能体会自动找到并调用合适的工具(并可用
+`tool_search` 搜索)。NevoFlux 会对服务器进行自动重连与健康检查监督;你的列表保存在
+`~/.config/nevoflux/mcp-servers.toml`。
+
+## 把 NevoFlux 作为 MCP 服务器
+
+智能体还能**作为 MCP 服务器**运行,以便其他 MCP 客户端(如 Claude Code)使用 NevoFlux
+的浏览器与电脑工具。以 MCP 模式运行内置的智能体二进制:
+
+```bash
+nevoflux --mcp
+```
+
+然后让你的 MCP 客户端指向它,例如 Claude Code:
+
+```json
+{
+  "mcpServers": {
+    "nevoflux": {
+      "command": "/path/to/nevoflux",
+      "args": ["--mcp"]
+    }
+  }
+}
+```
+
+在该模式下,NevoFlux 暴露其**浏览器**工具(导航、点击、输入、填写、截图、读取
+内容/markdown、快照、执行 JS 等)、**电脑**工具(截图、鼠标、键盘等),以及一个
+**`agent_chat`** 工具。
+
+> 智能体二进制已内置于浏览器安装包中;你也可以从
+> [智能体仓库](https://github.com/dorisgyl/nevoflux-agent)自行构建以独立使用。

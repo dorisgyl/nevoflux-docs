@@ -1,0 +1,60 @@
+---
+title: NevoFlux SDK
+description: The JavaScript API available inside Canvas apps — agent, storage, events, tools, sharing.
+---
+
+Every Canvas artifact runs with a global **`window.NevofluxSDK`** injected. Through it
+your app can talk to the agent, persist data, exchange events, run whitelisted tools,
+and share itself — all over a safe message bridge to the host.
+
+## API surface
+
+| Namespace | Methods |
+| --- | --- |
+| *(root)* | `callTool(action, params)` |
+| `agent` | `chat(message, options)`, `cancel(sessionId)`, `sendCommand(command, params)` |
+| `sidebar` | `open()`, `send(message)`, `notify(type, data)` |
+| `storage` | `get(key)`, `set(key, value)`, `delete(key)`, `query(prefix)` |
+| `system` | `getInfo()` |
+| `events` | `subscribe(patterns, handler, options)`, `publish(topic, data, options)`, `history(topic, options)`, `waitFor(pattern, options)`, `recover()` |
+| `tool` | `list(options)`, `invoke(toolName, params, options)` |
+| `share` | `share(artifactId, options)`, `import(shareId, password)`, `extend(shareId, secs)`, `delete(shareId)`, `list()` |
+
+### `agent.chat(message, options)`
+
+Streams a reply from the agent. `options` may include `sessionId`, `attachments`, and
+callbacks `onStream`, `onToolResult`, `onState`. Resolves to
+`{ text, toolResults, sessionId }`.
+
+## Example
+
+```javascript
+// 1) Ask the agent and stream the answer into the UI
+const result = await NevofluxSDK.agent.chat("summarize the current tab", {
+  onStream: (c) => { output.textContent += c.delta; },
+  onState:  (s) => { status.textContent = s.status; },
+});
+console.log(result.text);
+
+// 2) Persist a little state for this artifact
+await NevofluxSDK.storage.set("count", "1");
+const count = await NevofluxSDK.storage.get("count");
+
+// 3) Discover and run a whitelisted tool, streaming its events
+const { tools } = await NevofluxSDK.tool.list();
+const { callId } = await NevofluxSDK.tool.invoke(
+  "ffmpeg.probe",
+  { input: "/clip.mp4" },
+  { timeoutMs: 10000, onEvent: (e) => console.log(e.event_type, e) }
+);
+
+// 4) React to events from elsewhere in NevoFlux
+const sub = NevofluxSDK.events.subscribe(["session:*"], (evt) => {
+  console.log("event", evt);
+});
+// sub.unsubscribe() when done
+```
+
+> Which tools `tool.invoke` can run is controlled by the
+> [tool whitelist](/docs/canvas/tool-whitelist). Calls to disabled or unlisted tools
+> are rejected.

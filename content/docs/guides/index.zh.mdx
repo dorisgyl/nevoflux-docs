@@ -1,14 +1,35 @@
 ---
 title: 指南
-description: 面向常见工作流的实操教程。
+description: 组合 NevoFlux 各项功能的简短、任务导向的实操。
 ---
 
-帮助你用 NevoFlux 完成实际工作的分步指南。
+把本文档中的功能组合起来的实用实操。每一条今天就能让智能体去做。
 
-## 计划中的指南
+## 研究一个主题并保存结论
 
-- 自动化重复性的资料搜集任务
-- 从其他浏览器导入数据
-- 自定义命令栏
+1. 打开侧边栏(**`Ctrl+Shift+A`**)。
+2. 提问:*"研究 X 的前 3 个方案并对比它们。"* 智能体可能会派生
+   [子智能体](/zh/docs/features/subagents)并行工作。
+3. 保存结果:*"/brain-capture 保存这份对比。"* 之后用
+   [`/brain-recall`](/zh/docs/knowledge-base/using-gbrain) 回忆。
 
-> 想看某个指南?欢迎在 GitHub 上提交 issue。
+## 把页面变成一个小应用
+
+1. 在查看某些数据时,提问:*"/app 一个可排序、带搜索框的数据表格。"*
+2. NevoFlux 会构建一个可编辑、导出或分享的 [Canvas](/zh/docs/canvas) 应用。
+
+## 自动化一项重复检查
+
+1. 提问:*"/loop 30m 检查这个页面,状态变化就告诉我。"*
+2. 通过 `loop` 工具管理活动循环;完成后取消。
+
+## 给智能体添加你自己的工具
+
+1. 在[设置 → Canvas Tools](/zh/docs/settings/canvas-tools)中,用
+   [白名单 TOML 格式](/zh/docs/canvas/tool-whitelist)定义一个工具。
+2. 此后智能体和你的 Canvas 应用即可安全地调用它。
+
+## 在 Claude Code 中使用 NevoFlux
+
+以 [MCP 模式](/zh/docs/features/mcp)运行智能体(`nevoflux --mcp`)并将其加入你的 MCP
+客户端,即可从别处驱动浏览器与电脑。

@@ -1,0 +1,47 @@
+---
+title: 设置与 nevoflux:// 页面
+description: 设置页与内置的 nevoflux:// 页面,以及设置的存储方式。
+---
+
+在 **`nevoflux://settings`**(或侧边栏的齿轮图标)打开设置。它共有七个标签页:
+
+<Cards>
+  <Card title="General(常规)" href="/zh/docs/settings/general" />
+  <Card title="AI Models(AI 模型)" href="/zh/docs/settings/ai-models" />
+  <Card title="MCP Servers(MCP 服务器)" href="/zh/docs/settings/mcp-servers" />
+  <Card title="Canvas Tools(Canvas 工具)" href="/zh/docs/settings/canvas-tools" />
+  <Card title="My Canvas(我的 Canvas)" href="/zh/docs/settings/my-canvas" />
+  <Card title="Knowledge Base(知识库)" href="/zh/docs/settings/knowledge-base" />
+  <Card title="Shortcuts(快捷键)" href="/zh/docs/settings/shortcuts" />
+</Cards>
+
+你可以直接深链到某个标签页,例如 `nevoflux://settings/llm` 会打开 **AI Models**。
+
+## `nevoflux://` 页面
+
+NevoFlux 为其内置页面注册了自定义的 `nevoflux://` URL 协议:
+
+| URL | 页面 |
+| --- | --- |
+| `nevoflux://home` | 新标签页 / 主页 |
+| `nevoflux://settings` | 设置(本页) |
+| `nevoflux://canvas/{id}` | 打开某个 [Canvas](/zh/docs/canvas) 制品 |
+| `nevoflux://import/{share_id}` | 导入分享的 Canvas |
+| `nevoflux://history` | 对话历史 |
+| `nevoflux://plan/{id}` | 智能体的计划 |
+| `nevoflux://render/{job}` | 渲染任务的输出 |
+| `nevoflux://brain` | 浏览你的[知识库](/zh/docs/knowledge-base) |
+
+## 设置如何存储
+
+设置界面会写入三处,均位于你的配置目录下:
+
+- **界面偏好**(侧边栏行为、MCP 连接选项等)—— 修改时自动保存。
+- **`config.toml`** —— AI Models 标签页在此写入提供商密钥/模型。见
+  [配置](/zh/docs/configuration)。
+- **Markdown "灵魂" 文件**(`IDENTITY.md`、`SOUL.md`、`USER.md`、`TOOLS.md`、
+  `AGENTS.md`)—— General 标签页编辑它们;点击 **Save All Settings** 写入。见
+  [General](/zh/docs/settings/general)。
+
+其余标签页(MCP 服务器、Canvas 工具、知识库)会直接与智能体通信,以管理服务器、
+工具和知识库。

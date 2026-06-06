@@ -1,14 +1,37 @@
 ---
 title: Guides
-description: Task-focused, how-to guides for common workflows.
+description: Short, task-focused recipes that combine NevoFlux features.
 ---
 
-Step-by-step guides for getting real work done with NevoFlux.
+Practical recipes that combine the features in these docs. Each is something you can
+ask the agent to do today.
 
-## Planned guides
+## Research a topic and save the findings
 
-- Automating a repetitive research task
-- Importing data from another browser
-- Customizing the command bar
+1. Open the sidebar (**`Ctrl+Shift+A`**).
+2. Ask: *"research the top 3 options for X and compare them."* The agent may spawn
+   [subagents](/docs/features/subagents) to work in parallel.
+3. Save the result: *"/brain-capture save that comparison."* Recall it later with
+   [`/brain-recall`](/docs/knowledge-base/using-gbrain).
 
-> Have a guide you'd like to see? Open an issue on GitHub.
+## Turn a page into a small app
+
+1. While viewing some data, ask: *"/app a sortable table of this data with a search
+   box."*
+2. NevoFlux builds a [Canvas](/docs/canvas) app you can edit, export, or share.
+
+## Automate a repeating check
+
+1. Ask: *"/loop 30m check this page and tell me if the status changes."*
+2. Manage active loops via the `loop` tools; cancel when done.
+
+## Give the agent your own tool
+
+1. Define a tool in [Settings → Canvas Tools](/docs/settings/canvas-tools) using the
+   [whitelist TOML format](/docs/canvas/tool-whitelist).
+2. The agent and your Canvas apps can now call it safely.
+
+## Use NevoFlux from Claude Code
+
+Run the agent in [MCP mode](/docs/features/mcp) (`nevoflux --mcp`) and add it to your
+MCP client to drive the browser and computer from elsewhere.

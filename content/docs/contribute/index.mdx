@@ -1,17 +1,29 @@
 ---
 title: Contributing
-description: How to contribute to NevoFlux and its documentation.
+description: How to contribute to NevoFlux and to these docs.
 ---
 
 Contributions are welcome — code, docs, translations, and bug reports.
 
+## The repositories
+
+- **Browser** — [github.com/dorisgyl/nevoflux](https://github.com/dorisgyl/nevoflux)
+  (Firefox-based; the sidebar, `nevoflux://` pages, and Canvas).
+- **Agent** — [github.com/dorisgyl/nevoflux-agent](https://github.com/dorisgyl/nevoflux-agent)
+  (the Rust daemon, providers, skills, tools, and knowledge base).
+
 ## Ways to help
 
-- File issues and feature requests on [GitHub](https://github.com/dorisgyl/nevoflux).
-- Improve these docs (every page links to its source).
-- Help translate the docs into more languages.
+- File issues and feature requests on GitHub.
+- Improve these docs — they are written in MDX (English `*.mdx`, Simplified Chinese
+  `*.zh.mdx`).
+- Add or improve **skills** — see [Authoring skills](/docs/skills/authoring).
+- Help translate the docs and UI into more languages.
 
-## Editing the docs
+## Building from source
 
-Documentation lives in `content/docs` as MDX. English files are `*.mdx`;
-Simplified Chinese files use the `*.zh.mdx` suffix.
+- The **browser** builds with Node.js 22+, npm, and Python 3.
+- The **agent** is a Rust workspace (toolchain 1.91.0); on Linux it needs the X11 and
+  Wayland development libraries.
+
+See each repository's README for full build instructions.

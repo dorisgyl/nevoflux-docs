@@ -1,0 +1,4 @@
+{
+  "title": "Settings",
+  "pages": ["index", "general", "ai-models", "mcp-servers", "canvas-tools", "my-canvas", "knowledge-base", "shortcuts"]
+}

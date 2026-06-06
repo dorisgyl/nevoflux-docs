@@ -1,19 +1,39 @@
 ---
 title: 安装
-description: 在你的操作系统上下载并安装 NevoFlux。
+description: 下载并安装 NevoFlux 浏览器,智能体已内置其中。
 ---
 
-NevoFlux 支持 Windows、macOS 和 Linux。
+NevoFlux 以桌面浏览器形式发布,支持 Windows、macOS 和 Linux。请从
+[GitHub 发布页](https://github.com/dorisgyl/nevoflux/releases) 下载最新版本。
 
-## 下载
+## 各平台下载
 
-前往 [发布页面](https://github.com/dorisgyl/nevoflux/releases/latest) 获取最新版本,
-并选择与你的操作系统和 CPU 架构匹配的安装包。
+| 平台 | 安装包 |
+| --- | --- |
+| **Windows**(x64 / ARM64) | 安装程序 `.exe`(NSIS) |
+| **macOS**(Apple 芯片 + Intel) | 通用 `.dmg` |
+| **Linux**(x86_64 / aarch64) | `.tar.xz` 压缩包,或 `.AppImage` |
 
-## 平台说明
+首次安装后,NevoFlux 会自动保持更新。
 
-- **Windows** —— 运行安装程序并按提示操作。
-- **macOS** —— 打开 `.dmg` 并将 NevoFlux 拖入"应用程序"。
-- **Linux** —— 使用提供的 AppImage 或发行版软件包。
+## 智能体已内置
 
-> 各平台的详细安装说明即将推出。
+驱动侧边栏的 AI 智能体(本地后台进程)已**内置于浏览器**。首次启动时,浏览器会自动
+为你注册并启动它。日常使用**无需**单独安装或运行任何东西。
+
+## 安装之后
+
+1. 启动 NevoFlux。
+2. 按 **`Ctrl+Shift+A`**(macOS 为 **`Cmd+Shift+A`**)打开 AI 侧边栏。
+3. 首次运行时,侧边栏会显示一个简短的设置引导 —— 继续阅读
+   [配置 AI 模型](/zh/docs/getting-started/configure-ai-model)。
+
+> **AI 功能需要 API 密钥。** 没有密钥也能正常安装浏览器,但在你配置好模型并提供密钥
+> 之前,智能体无法回答。
+
+## 从源码构建(开发者)
+
+浏览器使用 **Node.js 22+**、npm 和 Python 3 构建;智能体是一个 Rust 工作区
+(工具链 **1.91.0**)。构建说明见
+[浏览器仓库](https://github.com/dorisgyl/nevoflux) 与
+[智能体仓库](https://github.com/dorisgyl/nevoflux-agent)。

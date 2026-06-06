@@ -1,0 +1,52 @@
+---
+title: Configure an AI Model
+description: The first thing to do after installing — pick a provider and add its API key.
+---
+
+Before the agent can do anything, you must configure an **AI model**. This is the
+first thing to do after installing.
+
+## 1. Open the sidebar
+
+Press **`Ctrl+Shift+A`** (**`Cmd+Shift+A`** on macOS) to toggle the AI sidebar.
+
+> This is the global shortcut to **show/hide the agent sidebar**. You can see it any
+> time under [Settings → Shortcuts](/docs/settings/shortcuts). If the sidebar does
+> not open, click the NevoFlux sidebar button in the toolbar, or press the shortcut
+> again to toggle it.
+
+On first run — when no provider is configured yet — the sidebar shows a **Welcome to
+NevoFlux** screen with a **Start Setup** button that takes you straight to the model
+settings.
+
+## 2. Choose a provider and add your key
+
+The setup button opens **`nevoflux://settings/llm`** (the **AI Models** tab of
+Settings). You can also open it any time with **`Ctrl+Shift+A`** → the gear icon, or
+by visiting `nevoflux://settings` and choosing **AI Models**.
+
+In the AI Models tab:
+
+1. Click the card for the provider you want (e.g. **Anthropic**, **OpenAI**,
+   **DeepSeek**, **Qwen**, …).
+2. Paste your **API Key**.
+3. (Optional) set a specific **Model** and a custom **Base URL**.
+4. Tick **Set as active provider**.
+5. **Save**.
+
+Saving writes the provider's settings into your `config.toml`
+(`[llm.<provider>]`) and marks it active. The sidebar detects the new provider and
+switches from the welcome screen to the chat view automatically.
+
+See [Configuration → Providers & API keys](/docs/configuration/providers) for the
+full list of supported providers, their default models, and the environment
+variables you can use instead of storing keys in the file.
+
+## 3. You're ready
+
+Open the sidebar and ask the agent something. Continue to
+[Start a conversation](/docs/getting-started/first-conversation).
+
+> **No keyring.** API keys are read from your `config.toml` or from environment
+> variables — NevoFlux does not store them in an OS keychain. Treat `config.toml`
+> as a secret file.

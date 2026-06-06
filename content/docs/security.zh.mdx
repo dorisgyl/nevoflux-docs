@@ -1,15 +1,35 @@
 ---
-title: 安全
-description: NevoFlux 如何处理你的数据与安全。
+title: 安全与隐私
+description: NevoFlux 如何处理你的数据、密钥与智能体权限。
 ---
 
-我们高度重视你浏览过程中的安全与隐私。
+## 数据存放位置
+
+NevoFlux 以本地优先。你的**会话**、**知识库**(`~/.gbrain/`)、**配置**和
+**API 密钥**都保存在你自己的机器上。智能体作为随浏览器内置的本地进程运行。
+
+会离开你机器的内容:你发送给所选 **LLM 提供商**的请求会到达该提供商;你使用的任何
+**MCP 服务器**或**网络工具**会访问各自的端点。
+
+## API 密钥
+
+密钥保存在 `config.toml` 或环境变量中 —— NevoFlux **不**使用操作系统钥匙串。请把
+`config.toml` 当作机密文件,切勿提交到任何地方。
+
+## 智能体执行前会询问
+
+默认情况下,智能体处于 **Confirm before actions(操作前确认)**模式:运行工具或命令前
+会请求你的批准。你可以在[设置 → General](/zh/docs/settings/general)中选择
+**Auto-execute(自动执行)** —— 请谨慎开启。
+
+## 工具与命令安全
+
+- **Canvas 工具**通过[白名单](/zh/docs/canvas/tool-whitelist)运行:无 shell、参数
+  校验、路径限制、输出/时间上限,以及审计日志。
+- **命令自动批准**由 [`config.toml`](/zh/docs/configuration) 的 `[auth]` 节管控,
+  包括允许列表和敏感文件匹配模式。
+- **Canvas 制品**运行在沙箱 iframe 中,页面内容与浏览器之间的桥接是隔离的。
 
 ## 报告漏洞
 
-如果你发现安全问题,请通过我们的
-[GitHub 仓库](https://github.com/dorisgyl/nevoflux) 负责任地进行报告。
-
-## 数据处理
-
-关于智能体访问哪些数据以及如何存储的完整说明正在编写中。
+请通过 [GitHub 仓库](https://github.com/dorisgyl/nevoflux)负责任地报告安全问题。

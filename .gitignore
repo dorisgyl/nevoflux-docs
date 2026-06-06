@@ -24,3 +24,5 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
+# local research scratch (not shipped)
+/RESEARCH_NOTES.md

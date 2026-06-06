@@ -1,0 +1,82 @@
+---
+title: 内置技能
+description: NevoFlux 随附的技能及其各自的用途。
+---
+
+NevoFlux 随附以下技能。用 `/<名称>` 调用其中任何一个。
+
+## 知识库
+
+### brain
+你的[知识库](/zh/docs/knowledge-base)的中枢。它为你引路,并路由到下面四个专注的 brain
+技能,同时加载共享约定。触发词如 "my knowledge base" / "second brain" / "知识库"。
+
+```text
+/brain
+```
+
+### brain-recall
+从知识库中**读取与回忆** —— 搜索与查询页面、回忆事实、查看值得注意或最近的内容、
+跟随链接与时间线。只读。
+
+```text
+/brain-recall 我对 Acme 项目了解些什么?
+```
+
+### brain-capture
+向知识库**保存与摄入** —— 归档页面、更新提炼出的"事实(truth)"、追加带日期的时间线
+条目、打标签与建立链接。可摄入 PDF/办公文档、视频字幕和图片。
+
+```text
+/brain-capture 把这篇文章保存到我的大脑
+```
+
+### brain-think
+在知识库上**综合与分析** —— 多跳、带引用的回答;"谁懂 X";趋势与走向;图遍历。
+
+```text
+/brain-think 把我关于定价和流失的笔记串起来
+```
+
+### brain-care
+**维护**你的知识库 —— 健康与体检报告、统计、查找矛盾/孤立页(仅报告)、同步索引、
+恢复软删除、回退错误编辑。绝不自行改写或删除。
+
+```text
+/brain-care 我的大脑健康吗?
+```
+
+## 创作
+
+### app
+用 NevoFlux SDK(存储、事件、工具、分享)构建可交互的 **[Canvas](/zh/docs/canvas)
+应用** —— HTML 单页应用、React/Vue/Svelte 多文件项目、SVG、Mermaid 图示或 Markdown。
+
+```text
+/app 一个带饼图的预算看板
+```
+
+### video
+创作可渲染为 MP4 的视频作品。适合短产品介绍、动态图形和社交平台尺寸(如 9:16)。
+
+```text
+/video 一段 9:16 的产品介绍,带我们的 logo
+```
+
+## 工作流
+
+### loop
+按周期性的时间/事件触发,重新运行一个提示(或被包裹的技能)。每次迭代从头开始;少量
+状态保存在便笺(scratchpad)中。
+
+```text
+/loop 5m 检查这个页面是否有新评论
+```
+
+### skill-creator
+创建、修改和改进技能 —— 包括起草新的 `SKILL.md`、优化技能描述以及衡量其表现。见
+[编写技能](/zh/docs/skills/authoring)。
+
+```text
+/skill-creator 把这个工作流变成一个可复用技能
+```

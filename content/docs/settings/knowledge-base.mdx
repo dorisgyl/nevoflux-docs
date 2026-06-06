@@ -1,0 +1,38 @@
+---
+title: Knowledge Base
+description: Enable and manage GBrain — your local, private knowledge base.
+---
+
+The **Knowledge Base** tab installs and manages **GBrain**, NevoFlux's local
+knowledge base. It runs a setup wizard for you; nothing leaves your machine.
+
+## Status
+
+The tab shows an install/setup **Status** badge and a live **Server** badge, plus
+details: the installed **bun** version, the **gbrain** version, and your **brain
+dir** path.
+
+## Enable it
+
+Click **Enable Knowledge Base** to run the wizard, which:
+
+1. Installs **bun** (the JS runtime GBrain uses).
+2. Installs the **gbrain** tool.
+3. Initializes your brain (a local vector + markdown store).
+4. Starts the knowledge-base server.
+
+Progress streams in a dialog. When the **Server** badge reads *ready*, GBrain is on.
+
+## Manage it
+
+- **Refresh** — re-check status.
+- **Restart server** — recover if it stopped.
+- **Update gbrain…** — update to a newer gbrain version.
+- **Browse Knowledge Base →** — opens `nevoflux://brain` to read your pages.
+
+*Example:* open this tab on a fresh install, click **Enable Knowledge Base**, wait
+for *ready*, then click **Browse Knowledge Base →**. Now ask the agent
+`/brain-capture save this page` while reading an article.
+
+See **[Knowledge Base (GBrain)](/docs/knowledge-base)** for how to capture, recall,
+and organize knowledge, and where the data is stored.

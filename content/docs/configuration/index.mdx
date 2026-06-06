@@ -1,0 +1,127 @@
+---
+title: config.toml
+description: Where the agent's config file lives, its full schema, and a complete example.
+---
+
+Most settings you change in the UI are stored in a single TOML file,
+**`config.toml`**. You can edit it by hand, and the [Settings](/docs/settings) UI
+writes to it for you.
+
+## Where it lives
+
+| Platform | Path |
+| --- | --- |
+| **Linux** | `~/.config/nevoflux/config.toml` |
+| **macOS** | `~/Library/Application Support/nevoflux/config.toml` (falls back to `~/.config/nevoflux/config.toml` if that exists) |
+| **Windows** | `%APPDATA%\nevoflux\config.toml` — e.g. `C:\Users\<you>\AppData\Roaming\nevoflux\config.toml` |
+
+The file is created with defaults the first time the agent runs. Every field is
+optional — anything you omit uses its default.
+
+> **Hand edits require a restart.** Changes you make through the Settings UI are
+> applied live. If you edit `config.toml` by hand, restart NevoFlux so the agent
+> reloads it.
+
+> **`config.toml` is not the `nevoflux config` CLI.** The `nevoflux config get/set`
+> commands read and write a separate internal key/value store, *not* this file.
+> Edit `config.toml` directly (or use the Settings UI) to change model/agent
+> behavior.
+
+## Sections
+
+| Section | Purpose |
+| --- | --- |
+| `[llm]` | Active provider and shared generation settings |
+| `[llm.<provider>]` | Per-provider key, model, base URL |
+| `[daemon]` | Background process: ports, timeouts, concurrency |
+| `[daemon.session]` | Session limits and cleanup |
+| `[daemon.context]` | Context window, history, compression |
+| `[daemon.subagent]` | Sub-agent concurrency and limits |
+| `[storage]` | Local SQLite storage |
+| `[logging]` | Log level and output |
+| `[auth]` | Command auto-approval and sensitive-file patterns |
+| `[learning]` | Self-learning pipeline |
+| `[embedding]` | Embedding model for search |
+| `[knowledge_base]` / `[knowledge_base.brain]` | GBrain knowledge base ([details](/docs/knowledge-base)) |
+| `[tts.*]` | Text-to-speech / transcription engines |
+
+## Key fields
+
+### `[llm]`
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `provider` | string | — | The active provider, e.g. `"anthropic"` |
+| `max_tokens` | int | `32768` | Max tokens per response |
+| `temperature` | float | `0.7` | Sampling temperature |
+| `timeout_secs` | int | `120` | Request timeout |
+| `max_retries` | int | `3` | Retry count |
+
+### `[llm.<provider>]`
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `api_key` | string | Provider API key (or use an env var — see [Providers](/docs/configuration/providers)) |
+| `model` | string | Model id; defaults to the provider's default |
+| `base_url` | string | Override the API endpoint (proxies / compatible servers) |
+| `context_window` | int | Override the model's context size |
+| `use_streaming` | bool | Stream responses (default on; `ollama` is off) |
+
+## A complete example
+
+```toml
+[llm]
+provider = "anthropic"
+max_tokens = 32768
+temperature = 0.7
+timeout_secs = 120
+max_retries = 3
+
+[llm.anthropic]
+# Prefer the ANTHROPIC_API_KEY env var over storing the key here.
+api_key = "sk-ant-..."
+model = "claude-sonnet-4-20250514"
+# base_url = "https://api.anthropic.com"   # optional
+# context_window = 200000                  # optional
+
+[llm.openai]
+model = "gpt-4o-mini"
+# base_url = "https://my-openai-compatible-host/v1"
+
+[llm.ollama]
+model = "llama3.2"
+base_url = "http://localhost:11434"
+use_streaming = false
+
+[daemon]
+idle_timeout_secs = 1800
+keep_alive_for_mcp = true
+
+[daemon.context]
+enable_compression = true
+compression_threshold_percent = 80
+keep_recent_messages = 6
+
+[storage]
+max_size_mb = 1024
+wal_mode = true
+
+[logging]
+level = "info"
+stdout = true
+
+[embedding]
+provider = "fastembed"
+model = "multilingual-e5-small"
+enabled = true
+
+[knowledge_base]
+enabled = true
+
+[auth]
+workspace_auto_allow = true
+allowed_commands = ["cargo *", "git *", "npm *", "just *"]
+```
+
+> **Treat `config.toml` as secret.** It can contain API keys. NevoFlux does not use
+> an OS keychain — keys live in this file or in environment variables.

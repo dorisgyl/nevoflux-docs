@@ -1,0 +1,49 @@
+---
+title: Settings & nevoflux:// pages
+description: The Settings page and the built-in nevoflux:// pages, with how settings are stored.
+---
+
+Open settings at **`nevoflux://settings`** (or via the gear in the sidebar). It has
+seven tabs:
+
+<Cards>
+  <Card title="General" href="/docs/settings/general" />
+  <Card title="AI Models" href="/docs/settings/ai-models" />
+  <Card title="MCP Servers" href="/docs/settings/mcp-servers" />
+  <Card title="Canvas Tools" href="/docs/settings/canvas-tools" />
+  <Card title="My Canvas" href="/docs/settings/my-canvas" />
+  <Card title="Knowledge Base" href="/docs/settings/knowledge-base" />
+  <Card title="Shortcuts" href="/docs/settings/shortcuts" />
+</Cards>
+
+You can deep-link to a tab, e.g. `nevoflux://settings/llm` opens **AI Models**.
+
+## The `nevoflux://` pages
+
+NevoFlux registers a custom `nevoflux://` URL scheme for its built-in pages:
+
+| URL | Page |
+| --- | --- |
+| `nevoflux://home` | New-tab / home page |
+| `nevoflux://settings` | Settings (this page) |
+| `nevoflux://canvas/{id}` | Open a [Canvas](/docs/canvas) artifact |
+| `nevoflux://import/{share_id}` | Import a shared Canvas |
+| `nevoflux://history` | Conversation history |
+| `nevoflux://plan/{id}` | An agent plan |
+| `nevoflux://render/{job}` | A render job's output |
+| `nevoflux://brain` | Browse your [Knowledge Base](/docs/knowledge-base) |
+
+## How settings are stored
+
+The Settings UI writes to three places, all under your config directory:
+
+- **UI preferences** (sidebar behavior, MCP connection options, …) — saved
+  automatically as you change them.
+- **`config.toml`** — the AI Models tab writes provider keys/models here. See
+  [Configuration](/docs/configuration).
+- **Markdown "soul" files** (`IDENTITY.md`, `SOUL.md`, `USER.md`, `TOOLS.md`,
+  `AGENTS.md`) — the General tab edits these; click **Save All Settings** to write
+  them. See [General](/docs/settings/general).
+
+Other tabs (MCP servers, Canvas tools, Knowledge Base) talk to the agent directly to
+manage servers, tools, and the knowledge base.

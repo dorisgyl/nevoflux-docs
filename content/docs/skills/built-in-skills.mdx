@@ -1,0 +1,89 @@
+---
+title: Built-in Skills
+description: The skills that ship with NevoFlux and what each one does.
+---
+
+NevoFlux ships with the following skills. Invoke any of them with `/<name>`.
+
+## Knowledge base
+
+### brain
+The hub for your [knowledge base](/docs/knowledge-base). It orients you and routes to
+the four focused brain skills below, loading shared conventions. Triggers on phrases
+like "my knowledge base" / "second brain" / "知识库".
+
+```text
+/brain
+```
+
+### brain-recall
+**Read and recall** from your knowledge base — search and query pages, recall facts,
+see what's notable or recent, follow links and timelines. Read-only.
+
+```text
+/brain-recall what do I know about project Acme?
+```
+
+### brain-capture
+**Save and ingest** into your knowledge base — file pages, update the distilled
+"truth", append a dated timeline entry, tag and link. Can ingest PDFs/office docs,
+video subtitles, and images.
+
+```text
+/brain-capture save this article to my brain
+```
+
+### brain-think
+**Synthesize and analyze** across your knowledge base — multi-hop, cited answers;
+"who knows about X"; trends and trajectories; graph traversal.
+
+```text
+/brain-think connect the dots between my notes on pricing and churn
+```
+
+### brain-care
+**Maintain** your knowledge base — health and doctor reports, stats, find
+contradictions/orphans (report only), sync the index, restore soft-deletes, revert a
+bad edit. Never rewrites or deletes on its own.
+
+```text
+/brain-care is my brain healthy?
+```
+
+## Creation
+
+### app
+Build an interactive **[Canvas](/docs/canvas) app** — an HTML single-page app, a
+React/Vue/Svelte multi-file project, an SVG, a Mermaid diagram, or Markdown — using
+the NevoFlux SDK (storage, events, tools, sharing).
+
+```text
+/app a budget dashboard with a pie chart
+```
+
+### video
+Author a video composition that renders to MP4. Great for short product intros,
+motion graphics, and social formats (e.g. 9:16).
+
+```text
+/video a 9:16 product intro with our logo
+```
+
+## Workflow
+
+### loop
+Re-run a prompt (or a wrapped skill) on a recurring time/event trigger. Each
+iteration starts fresh; small state persists in a scratchpad.
+
+```text
+/loop 5m check this page for new comments
+```
+
+### skill-creator
+Create, modify, and improve skills — including drafting a new `SKILL.md`, optimizing
+a skill's description, and measuring its performance. See
+[Authoring skills](/docs/skills/authoring).
+
+```text
+/skill-creator turn this workflow into a reusable skill
+```

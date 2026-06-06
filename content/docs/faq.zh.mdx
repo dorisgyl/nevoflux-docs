@@ -3,14 +3,46 @@ title: 常见问题
 description: 关于 NevoFlux 的常见问题。
 ---
 
-## NevoFlux 是免费的吗?
+## 如何打开 AI 侧边栏?
 
-有关价格与可用性的详细信息将在此发布。
+按 **`Ctrl+Shift+A`**(macOS 为 **`Cmd+Shift+A`**)切换。该快捷键列在
+[设置 → Shortcuts](/zh/docs/settings/shortcuts)中。
 
-## 支持哪些平台?
+## 需要单独安装智能体吗?
 
-Windows、macOS 和 Linux。参见 [安装](/zh/docs/getting-started/installation)。
+不需要。智能体已内置于浏览器并自动启动。你只需
+[配置一个 AI 模型](/zh/docs/getting-started/configure-ai-model)。
 
-## 我的数据如何被处理?
+## 支持哪些 AI 提供商?
 
-请参见 [安全](/zh/docs/security) 页面。
+很多 —— Anthropic、OpenAI、DeepSeek、Qwen、Gemini、Groq、OpenRouter、Mistral、
+xAI/Grok、Cohere、Perplexity、Together、Ollama(本地),以及 CLI/agent 类的
+Claude Code、Gemini CLI、Kimi Agent 和 OpenClaw。完整表格见
+[提供商与 API 密钥](/zh/docs/configuration/providers)。
+
+## API 密钥放在哪里?
+
+放在[设置 → AI Models](/zh/docs/settings/ai-models),或作为环境变量,或写入
+[`config.toml`](/zh/docs/configuration) 的 `[llm.<provider>]`。NevoFlux 不使用操作
+系统钥匙串。
+
+## 配置文件在哪里?
+
+`~/.config/nevoflux/config.toml`(Linux)、
+`~/Library/Application Support/nevoflux/config.toml`(macOS),或
+`%APPDATA%\nevoflux\config.toml`(Windows)。见[配置](/zh/docs/configuration)。
+
+## 我改了 config.toml,但没生效。
+
+在设置界面所做的修改会即时生效;手动编辑 `config.toml` 需要重启。另外请注意:
+`nevoflux config` 命令行编辑的是另一个存储,**不是** `config.toml`。
+
+## 为什么在 Linux 上智能体无法控制我的鼠标/键盘?
+
+Wayland 出于安全考虑禁止合成输入。请在 X11(或 XWayland)下运行会话。见
+[电脑控制](/zh/docs/features/computer-control)。
+
+## 我的数据私密吗?
+
+你的会话、知识库和密钥都留在你的机器上。发往 LLM 提供商的请求会到达该提供商。见
+[安全](/zh/docs/security)。

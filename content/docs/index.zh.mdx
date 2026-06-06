@@ -1,22 +1,39 @@
 ---
 title: 简介
-description: 欢迎阅读 NevoFlux 文档。
+description: NevoFlux 是一款 AI 原生浏览器 —— 别只是浏览,去指挥。
 ---
 
-**NevoFlux** 是一款 AI 原生浏览器 —— *别只是浏览,去指挥。*
+**NevoFlux** 是一款 AI 原生浏览器。内置的 AI 智能体常驻在侧边栏中,它能读取你当前
+浏览的页面、替你操作浏览器、控制你的电脑、运行技能(skill)、构建可交互的 Canvas
+应用,并把重要内容记入本地知识库。*别只是浏览,去指挥。*
 
-这里是官方文档的主页。无论你是第一次安装 NevoFlux,还是想接入它的智能体来
-自动化工作流,都能在这里找到所需内容。
+## 整体构成
+
+NevoFlux 由一起发布的两部分组成:
+
+- **浏览器** —— 一款基于 Firefox 的浏览器,带有 AI **侧边栏**、`nevoflux://`
+  设置与页面体系,以及用于呈现丰富可交互内容的 **Canvas** 运行时。
+- **智能体(Agent)** —— 一个随浏览器内置的本地后台进程(守护进程 "daemon")。
+  它负责运行 LLM 对话、调用工具、执行技能并管理你的知识库。它由浏览器**自动安装并
+  启动**,你无需手动运行。
+
+两者通过本地安全通道通信。你的 API 密钥、会话和知识库都保存在你自己的机器上。
 
 <Cards>
   <Card title="快速开始" href="/zh/docs/getting-started" />
-  <Card title="用户手册" href="/zh/docs/user-manual" />
-  <Card title="AI 功能" href="/zh/docs/ai-features" />
-  <Card title="指南" href="/zh/docs/guides" />
+  <Card title="配置 AI 模型" href="/zh/docs/getting-started/configure-ai-model" />
+  <Card title="设置参考" href="/zh/docs/settings" />
+  <Card title="知识库(GBrain)" href="/zh/docs/knowledge-base" />
 </Cards>
 
-## 什么是 NevoFlux?
+## 智能体能做什么
 
-NevoFlux 将 AI 智能体置于浏览体验的核心,你只需描述需求,浏览器即可代为执行。
+- **替你浏览** —— 导航、点击、输入、滚动、截图并读取页面。
+- **控制你的电脑** —— 截图、鼠标和键盘(因平台而异)。
+- **运行技能** —— 复用的能力,如 `/brain`、`/app`、`/video`。
+- **构建 Canvas 应用** —— 生成可交互的 HTML/React/Vue/Svelte 应用、图表、图示、
+  幻灯片,甚至视频,并在标签页中实时呈现。
+- **记忆** —— 在本地 **GBrain** 知识库中捕获与回忆知识。
+- **使用你的工具** —— 接入外部 **MCP 服务器**,并定义**工具白名单**。
 
-> 本文档仍在持续完善中,标注为草稿的页面会随着功能上线而逐步补全。
+> 本文档描述的是已在代码中实现的功能。对于因平台而异或可选的能力,相应页面会特别说明。

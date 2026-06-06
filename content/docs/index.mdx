@@ -1,25 +1,43 @@
 ---
 title: Introduction
-description: Welcome to the NevoFlux documentation.
+description: NevoFlux is an AI-native browser — don't just browse, command.
 ---
 
-**NevoFlux** is the AI-native browser — *Don't just browse. Command.*
+**NevoFlux** is an AI-native browser. A built-in AI agent lives in the sidebar and
+can read the page you are on, drive the browser for you, control your computer,
+run skills, build interactive Canvas apps, and remember what matters in a local
+knowledge base. *Don't just browse. Command.*
 
-This is the home of the official documentation. Whether you are installing
-NevoFlux for the first time or wiring up its agent to automate your workflow,
-you'll find what you need here.
+## How it fits together
+
+NevoFlux is two pieces that ship together:
+
+- **The browser** — a Firefox-based browser with an AI **sidebar**, a `nevoflux://`
+  settings/pages system, and the **Canvas** runtime for rich, interactive output.
+- **The agent** — a local background process (the "daemon") bundled inside the
+  browser. It runs the LLM conversation, calls tools, executes skills, and manages
+  your knowledge base. It is installed and started automatically by the browser —
+  you do not run it yourself.
+
+The two talk over a secure local bridge. Your API keys, sessions, and knowledge
+base stay on your machine.
 
 <Cards>
   <Card title="Getting Started" href="/docs/getting-started" />
-  <Card title="User Manual" href="/docs/user-manual" />
-  <Card title="AI Features" href="/docs/ai-features" />
-  <Card title="Guides" href="/docs/guides" />
+  <Card title="Configure an AI model" href="/docs/getting-started/configure-ai-model" />
+  <Card title="Settings reference" href="/docs/settings" />
+  <Card title="Knowledge Base (GBrain)" href="/docs/knowledge-base" />
 </Cards>
 
-## What is NevoFlux?
+## What the agent can do
 
-NevoFlux puts an AI agent at the center of the browsing experience, so you can
-describe what you want and let the browser carry it out.
+- **Browse for you** — navigate, click, type, scroll, screenshot, and read pages.
+- **Control your computer** — screenshots, mouse, and keyboard (platform dependent).
+- **Run skills** — reusable capabilities like `/brain`, `/app`, and `/video`.
+- **Build Canvas apps** — generate interactive HTML/React/Vue/Svelte apps, charts,
+  diagrams, slides, and even video, rendered live in a tab.
+- **Remember** — capture and recall knowledge in a local **GBrain** knowledge base.
+- **Use your tools** — connect external **MCP servers** and define a **tool whitelist**.
 
-> This documentation is a work in progress. Pages marked as drafts will be
-> filled in as features land.
+> This documentation describes features that exist in the shipping code. Where a
+> capability is platform-specific or optional, the relevant page says so.

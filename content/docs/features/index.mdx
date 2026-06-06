@@ -1,0 +1,47 @@
+---
+title: The Agent
+description: How the sidebar agent works — chat, permissions, plans, and tools.
+---
+
+The agent lives in the sidebar (**`Ctrl+Shift+A`** / **`Cmd+Shift+A`**). You talk to
+it in plain language; it decides which tools to use and carries out the work.
+
+## Conversation
+
+Type a request and send it. The agent can see your current page, stream its reply,
+and call tools as needed. Past sessions are at `nevoflux://history`.
+
+## Permissions (human-in-the-loop)
+
+By default the agent **asks before it acts**. When it wants to run a tool or a
+command you'll see a permission prompt to approve or deny. Switch to **Auto-execute**
+in [Settings → General](/docs/settings/general) to let it run without confirming each
+step.
+
+## Plans and thinking
+
+For multi-step work the agent can:
+
+- **Plan** — produce an approvable, step-by-step plan you can review before it runs.
+- **Think** — reason privately before acting, with no side effects.
+
+## Asking you questions
+
+When something is ambiguous, the agent can pause and **ask you a question** rather
+than guess.
+
+## Switching models mid-task
+
+The agent can **switch models** during a conversation — e.g. use a fast model to
+browse and a stronger one to write — without you re-opening settings.
+
+## What it can do
+
+<Cards>
+  <Card title="Browser automation" href="/docs/features/browser-automation" />
+  <Card title="Computer control" href="/docs/features/computer-control" />
+  <Card title="Subagents & orchestration" href="/docs/features/subagents" />
+  <Card title="Automation & memory" href="/docs/features/automation" />
+  <Card title="Skills" href="/docs/skills" />
+  <Card title="Canvas apps" href="/docs/canvas" />
+</Cards>

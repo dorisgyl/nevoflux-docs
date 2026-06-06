@@ -1,0 +1,45 @@
+---
+title: 智能体
+description: 侧边栏智能体如何工作 —— 对话、权限、计划与工具。
+---
+
+智能体常驻侧边栏(**`Ctrl+Shift+A`** / **`Cmd+Shift+A`**)。你用自然语言与它交流;
+它自行决定使用哪些工具并完成工作。
+
+## 对话
+
+输入请求并发送。智能体能看到你当前的页面,以流式方式回复,并按需调用工具。过往会话
+位于 `nevoflux://history`。
+
+## 权限(人类在环)
+
+默认情况下,智能体在**执行前会询问**。当它想运行工具或命令时,你会看到一个权限提示
+以批准或拒绝。在[设置 → General](/zh/docs/settings/general)中切换为 **Auto-execute**,
+可让它无需逐步确认地执行。
+
+## 计划与思考
+
+对于多步任务,智能体可以:
+
+- **Plan(计划)** —— 生成可供你在执行前审阅、可批准的分步计划。
+- **Think(思考)** —— 在行动前私下推理,不产生副作用。
+
+## 向你提问
+
+当出现歧义时,智能体可以暂停并**向你提问**,而不是猜测。
+
+## 任务中途切换模型
+
+智能体可在对话中**切换模型** —— 例如用快速模型浏览、用更强的模型撰写 —— 你无需重新
+打开设置。
+
+## 它能做什么
+
+<Cards>
+  <Card title="浏览器自动化" href="/zh/docs/features/browser-automation" />
+  <Card title="电脑控制" href="/zh/docs/features/computer-control" />
+  <Card title="子智能体与编排" href="/zh/docs/features/subagents" />
+  <Card title="自动化与记忆" href="/zh/docs/features/automation" />
+  <Card title="技能" href="/zh/docs/skills" />
+  <Card title="Canvas 应用" href="/zh/docs/canvas" />
+</Cards>

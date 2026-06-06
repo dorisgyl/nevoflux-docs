@@ -1,0 +1,45 @@
+---
+title: GBrain 概述
+description: 一个本地、私有的"第二大脑",智能体可向其写入并从中回忆。
+---
+
+**GBrain** 是 NevoFlux 的知识库 —— 一个本地、私有的存储,保存你的笔记、页面和事实,
+智能体可将内容捕获进去,也能从中回忆。一切都留在你的机器上。
+
+## 工作原理
+
+GBrain 作为一个本地后台工具运行,智能体与之通信。页面以 **Markdown 文件**存储,并带有
+向量 + 关键词索引用于搜索,因此智能体能按语义而非仅按精确词找到内容。
+
+每个页面遵循一个简单模型:
+
+- 顶部是提炼出的 **"compiled truth"** —— 持久、当前的摘要。
+- `---` 分隔符下方是只追加、最新在前的 **timeline(时间线)** —— 记录发生了什么或
+  添加了什么的带日期条目。
+
+## 启用
+
+GBrain 默认关闭,需你手动开启。打开
+[设置 → Knowledge Base](/zh/docs/settings/knowledge-base) 并点击 **Enable Knowledge
+Base**。向导会安装运行时、初始化你的大脑并启动服务。当 **Server** 徽标显示 *ready*
+时即就绪。
+
+## 浏览
+
+打开 **`nevoflux://brain`**,可直接在浏览器中浏览你的页面。
+
+## 数据存放位置
+
+你的知识库位于 **`~/.gbrain/`**:
+
+- `atlas/**/*.md` —— 你的页面(事实来源;页面的 slug 即其路径)。
+- `journal/` —— 只追加日志。
+- `brain.pglite/` —— 本地搜索数据库(向量 + 关键词)。
+
+配置位于 [`config.toml`](/zh/docs/configuration) 的 `[knowledge_base]` /
+`[knowledge_base.brain]`。
+
+## 使用
+
+用 brain 系列技能来捕获、回忆、综合与维护你的知识。见
+**[使用 GBrain](/zh/docs/knowledge-base/using-gbrain)**。

@@ -1,0 +1,39 @@
+---
+title: General
+description: Sidebar behavior, agent execution mode, data path, and the agent's persona files.
+---
+
+The **General** tab controls how the sidebar and agent behave, and lets you shape
+the agent's persona.
+
+## Sidebar & Agent
+
+| Setting | Options | What it does |
+| --- | --- | --- |
+| **Sidebar default** | Auto-open / Manual only | Whether the sidebar opens automatically |
+| **Agent execution** | Confirm before actions / Auto-execute | Whether the agent asks before each action |
+| **Data storage** | path | Where artifact and session data are stored (e.g. `~/.config/nevoflux/`) |
+
+*Example:* switch **Agent execution** to **Auto-execute** to let the agent run
+multi-step tasks without confirming every action. These save instantly.
+
+## Persona ("soul") files
+
+Five Markdown cards let you shape who the agent is and what it knows about you and
+your environment. Each card is saved to a file in your config directory when you
+click **Save All Settings**:
+
+| Card | File | Use it for |
+| --- | --- | --- |
+| **Identity** | `IDENTITY.md` | The agent's name, character, vibe (and an **Avatar**) |
+| **Soul** | `SOUL.md` | Core values and behavioral principles |
+| **User** | `USER.md` | Facts about *you* (name, pronouns, timezone, context) |
+| **Tools** | `TOOLS.md` | Your environment (SSH hosts, devices, TTS preferences) |
+| **Agents Runtime** | `AGENTS.md` | Runtime instructions, memory rules, safety protocols |
+
+*Example:* paste a short bio and your timezone into **User**, then **Save All
+Settings** — the agent will tailor answers to you. Set a name and personality in
+**Identity** to give the assistant a consistent voice.
+
+> These files also participate in NevoFlux's [self-learning](/docs/features/automation)
+> system, which can propose updates to them over time.

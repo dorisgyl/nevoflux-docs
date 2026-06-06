@@ -1,0 +1,36 @@
+---
+title: Subagents & Orchestration
+description: The agent can spawn specialized helpers and batch tool calls with code mode.
+---
+
+For larger jobs the agent can split work across **subagents** and batch many tool
+calls efficiently with **orchestration**.
+
+## Subagents (roles)
+
+The agent can spawn focused helper agents, each with a **role** that defines its
+mode, allowed tools, and iteration budget. Built-in roles include:
+
+| Role | Mode | Good for |
+| --- | --- | --- |
+| **explorer** | browser | Quick scouting across pages |
+| **researcher** | browser | Deeper, multi-step web research |
+| **worker** | agent | Carrying out a concrete task |
+| **reader** | agent | Reading and extracting from content |
+
+The main agent spawns them, waits for results (individually or all together), checks
+status, and can stop them. Roles are Markdown files with frontmatter, so you can add
+your own.
+
+*Example:* "research the top 3 vector databases and summarize trade-offs" — the agent
+may spawn a **researcher** per database and combine their findings.
+
+## Orchestration (code mode)
+
+Instead of issuing tool calls one at a time, the agent can use **`orchestrate`** to
+write a short Python script that calls many tools in one pass. The script runs in a
+**sandboxed interpreter** (no imports, no file system, no network beyond the provided
+tools), with automatic checking and repair. This is much faster for repetitive,
+multi-step work (e.g. visiting 20 pages and collecting one field from each).
+
+If you want to review before it runs, the agent will produce a **plan** first.

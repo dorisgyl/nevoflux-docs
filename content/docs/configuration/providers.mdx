@@ -1,0 +1,72 @@
+---
+title: Providers & API Keys
+description: Every supported LLM provider, its default model, and its API-key variable.
+---
+
+NevoFlux supports many LLM providers. Select one in
+[Settings → AI Models](/docs/settings/ai-models) or by setting `provider` in
+[`config.toml`](/docs/configuration).
+
+## Supported providers
+
+| Provider | `provider` value | Default model | API key env var |
+| --- | --- | --- | --- |
+| Anthropic | `anthropic` | `claude-sonnet-4-20250514` | `ANTHROPIC_API_KEY` |
+| OpenAI | `openai` | `gpt-4o-mini` | `OPENAI_API_KEY` |
+| OpenRouter | `openrouter` | `anthropic/claude-3-haiku` | `OPENROUTER_API_KEY` |
+| DeepSeek | `deepseek` | `deepseek-chat` | `DEEPSEEK_API_KEY` |
+| Qwen (DashScope) | `qwen` | `qwen-turbo` | `DASHSCOPE_API_KEY` |
+| Google Gemini | `gemini` | `gemini-3-flash-preview` | `GEMINI_API_KEY` |
+| Groq | `groq` | `llama-3.3-70b-versatile` | `GROQ_API_KEY` |
+| Ollama (local) | `ollama` | `llama3.2` | `OLLAMA_API_KEY` |
+| Mistral | `mistral` | `mistral-small-latest` | `MISTRAL_API_KEY` |
+| xAI / Grok | `xai` (alias `grok`) | `grok-2-latest` | `XAI_API_KEY` |
+| Cohere | `cohere` | `command-r-plus` | `COHERE_API_KEY` |
+| Perplexity | `perplexity` | `llama-3.1-sonar-small-128k-online` | `PERPLEXITY_API_KEY` |
+| Together | `together` | `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo` | `TOGETHER_API_KEY` |
+| Claude Code (CLI) | `claude-code` | `sonnet` | `ANTHROPIC_API_KEY` |
+| Gemini CLI | `gemini-cli` | `gemini-2.5-pro` | `GEMINI_API_KEY` |
+| Kimi Agent | `kimi-agent` (alias `kimi`) | `kimi-latest` | `MOONSHOT_API_KEY` |
+| OpenClaw | `openclaw` | `default` | `OPENCLAW_API_KEY` |
+
+> **Provider types.** The AI Models tab groups these as **service** (cloud APIs),
+> **local** (Ollama), **CLI** (`claude-code`, `gemini-cli`, `kimi-agent` — these run
+> a local command-line agent and manage their own auth), and **agent**
+> (`openclaw`). CLI/agent providers stream their output; a couple of providers
+> (notably **Ollama**) do not support streaming.
+
+## Supplying API keys
+
+There are two ways to give a provider its key; the agent checks them in this order:
+
+1. **In `config.toml`** — `api_key` under `[llm.<provider>]`:
+
+   ```toml
+   [llm.anthropic]
+   api_key = "sk-ant-..."
+   ```
+
+2. **Environment variable** — the variable from the table above, e.g.:
+
+   ```bash
+   export ANTHROPIC_API_KEY="sk-ant-..."
+   ```
+
+> NevoFlux does **not** store keys in an OS keychain. Use the config file or an
+> environment variable.
+
+## Custom endpoints
+
+Set `base_url` under a provider to point at a proxy or an OpenAI-compatible server:
+
+```toml
+[llm.openai]
+model = "my-model"
+base_url = "https://my-gateway.example.com/v1"
+```
+
+## Switching the active model
+
+Change the active provider in [Settings → AI Models](/docs/settings/ai-models), edit
+`provider` in `config.toml`, or ask the agent to switch models mid-conversation
+(it has a `switch_model` capability).

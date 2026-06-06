@@ -1,0 +1,42 @@
+---
+title: MCP Servers(MCP 服务器)
+description: 接入外部 Model Context Protocol 服务器,为智能体添加更多工具。
+---
+
+**MCP Servers** 标签页用于接入外部
+[Model Context Protocol](https://modelcontextprotocol.io) 服务器,把它们的工具加入
+智能体。NevoFlux 会对其进行自动重连与健康检查监督。
+
+## 添加服务器
+
+点击 **+ Add MCP Server** 并选择 **Connection Type**:
+
+- **stdio** —— 本地命令。字段:**Command**(必填)、**Arguments**、
+  **Working Directory**、**Environment**(`KEY=value,KEY2=value2`)。
+- **sse** —— Server-Sent-Events 端点。字段:**SSE Endpoint URL**、
+  **Reconnect (ms)**、**Timeout (ms)**、**Headers**(JSON)。
+- **http** —— HTTP 端点。字段:**Base URL**、**Request Method**、
+  **Timeout (ms)**、**Headers**(JSON)、**API Key**。
+
+填写 **Description**,然后 **Save**。每个服务器会出现在列表中,带启用开关和
+编辑/删除操作。
+
+*示例(stdio):* 名称 `filesystem`,命令
+`npx -y @modelcontextprotocol/server-filesystem`,参数 `/home/me/docs` —— 智能体
+即可通过该服务器的工具读写该文件夹。
+
+## 连接设置(Connection Settings)
+
+适用于所有服务器的全局选项(自动保存):
+
+| 设置 | 含义 |
+| --- | --- |
+| **Auto-reconnect** | 自动重连断开的服务器 |
+| **Health check interval** | 健康检查间隔(秒) |
+| **Max reconnect attempts** | 最大重试次数 |
+| **Reconnect delay** | 每次重试间隔(秒) |
+
+你添加的服务器保存为 `~/.config/nevoflux/mcp-servers.toml`。
+
+> 智能体会在所有已连接的服务器中自动找到合适的工具,并可用其 `tool_search` 能力
+> 搜索它们。

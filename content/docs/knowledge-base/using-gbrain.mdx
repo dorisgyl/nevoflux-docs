@@ -1,0 +1,59 @@
+---
+title: Using GBrain
+description: Capture, recall, synthesize, and maintain your knowledge with the brain skills.
+---
+
+You work with GBrain through five skills. Each is a slash command; the agent picks
+the right knowledge-base tools for you.
+
+## Capture — save things
+
+Use [`/brain-capture`](/docs/skills/built-in-skills#brain-capture) to file knowledge.
+It checks for an existing page, folds durable facts into the page's *compiled truth*,
+appends a dated timeline entry, and tags/links it.
+
+```text
+/brain-capture save this article about Acme's pricing
+```
+
+It can also ingest PDFs and office documents, video subtitles, and images.
+
+## Recall — find what you know
+
+Use [`/brain-recall`](/docs/skills/built-in-skills#brain-recall) to read back
+knowledge. It searches and queries pages, recalls facts, surfaces what's recent or
+notable, and follows links and timelines. It is read-only and cites the page it drew
+from.
+
+```text
+/brain-recall what do I know about Jane Doe?
+```
+
+## Think — connect the dots
+
+Use [`/brain-think`](/docs/skills/built-in-skills#brain-think) for synthesis:
+multi-hop, cited answers across many pages, "who knows about X", trends over time, and
+graph traversal.
+
+```text
+/brain-think summarize how my view on remote work changed this year
+```
+
+## Care — keep it healthy
+
+Use [`/brain-care`](/docs/skills/built-in-skills#brain-care) to maintain the base:
+health/doctor reports, stats, find contradictions or orphans, re-sync the index,
+restore a soft-deleted page, or revert a bad edit. It never rewrites or deletes on its
+own.
+
+```text
+/brain-care run a health check and sync the index
+```
+
+## Browse and share
+
+- **Browse** all pages at `nevoflux://brain`.
+- **Share** an encrypted bundle of pages, and import one others share with you.
+
+> Tip: while reading any web page, `/brain-capture save this page` stores it for
+> later recall. Then days later, `/brain-recall` finds it by meaning.

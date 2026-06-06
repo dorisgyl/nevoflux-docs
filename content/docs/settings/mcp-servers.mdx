@@ -1,0 +1,42 @@
+---
+title: MCP Servers
+description: Connect external Model Context Protocol servers to give the agent more tools.
+---
+
+The **MCP Servers** tab connects external
+[Model Context Protocol](https://modelcontextprotocol.io) servers, adding their
+tools to the agent. NevoFlux supervises them with auto-reconnect and health checks.
+
+## Add a server
+
+Click **+ Add MCP Server** and pick a **Connection Type**:
+
+- **stdio** — a local command. Fields: **Command** (required), **Arguments**,
+  **Working Directory**, **Environment** (`KEY=value,KEY2=value2`).
+- **sse** — a Server-Sent-Events endpoint. Fields: **SSE Endpoint URL**,
+  **Reconnect (ms)**, **Timeout (ms)**, **Headers** (JSON).
+- **http** — an HTTP endpoint. Fields: **Base URL**, **Request Method**,
+  **Timeout (ms)**, **Headers** (JSON), **API Key**.
+
+Add a **Description**, then **Save**. Each server appears in the list with an
+enable toggle and edit/delete actions.
+
+*Example (stdio):* name `filesystem`, command
+`npx -y @modelcontextprotocol/server-filesystem`, arguments `/home/me/docs` — the
+agent can now read and write files in that folder through the server's tools.
+
+## Connection Settings
+
+Global options for all servers (saved automatically):
+
+| Setting | Meaning |
+| --- | --- |
+| **Auto-reconnect** | Reconnect dropped servers |
+| **Health check interval** | Seconds between health checks |
+| **Max reconnect attempts** | How many times to retry |
+| **Reconnect delay** | Seconds between attempts |
+
+Servers you add are stored as `~/.config/nevoflux/mcp-servers.toml`.
+
+> The agent finds the right tool across all connected servers automatically, and can
+> search them with its `tool_search` capability.

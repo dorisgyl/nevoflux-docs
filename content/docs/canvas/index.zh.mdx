@@ -1,0 +1,50 @@
+---
+title: Canvas
+description: 由智能体构建的可交互应用、文档、图示与视频的实时运行时。
+---
+
+**Canvas** 是 NevoFlux 用于呈现丰富可交互内容的运行时。当你让智能体构建某物 —— 看板、
+计算器、图表、图示、幻灯片或视频 —— 它会生成一个 Canvas 制品,在独立标签页中打开并
+实时运行。
+
+## 创建 Canvas
+
+直接提需求,或使用 [`app` 技能](/zh/docs/skills/built-in-skills#app):
+
+```text
+/app 一个带实时预览的 markdown 编辑器
+```
+
+智能体生成制品并在 `nevoflux://canvas/{id}` 打开它。你也可以从
+[设置 → My Canvas](/zh/docs/settings/my-canvas)打开已保存的制品。
+
+## Canvas 可以是什么
+
+- **HTML 应用** —— 单页应用。
+- **多文件项目** —— React、Vue 或 Svelte,自动打包(esbuild)。
+- **Markdown**、**SVG**、**Mermaid 图示**、幻灯片。
+- **视频作品** —— 渲染为 MP4(见 [`video` 技能](/zh/docs/skills/built-in-skills#video))。
+
+制品运行在**沙箱 iframe** 中以保证安全。
+
+## 操作 Canvas
+
+工具栏让你:
+
+- 在 **Preview(预览)** 与 **Edit(编辑,代码编辑器)** 之间切换。
+- **Copy(复制)**源码。
+- **Export(导出)**为多种格式 —— Source、HTML、PNG、PDF、DOCX、SVG、Markdown、
+  PPTX、XLSX,或项目的 ZIP。
+- **Share(分享)**制品(端到端加密),并可通过 `nevoflux://import/{share_id}`
+  导入分享的制品。
+
+## 构建能与智能体对话的应用
+
+Canvas 应用可以回调 NevoFlux —— 与智能体对话、存储数据、发布事件、运行白名单工具 ——
+均通过 **[NevoFlux SDK](/zh/docs/canvas/sdk)**。应用可运行的工具集合由
+**[工具白名单](/zh/docs/canvas/tool-whitelist)**管控。
+
+<Cards>
+  <Card title="NevoFlux SDK" href="/zh/docs/canvas/sdk" />
+  <Card title="工具白名单" href="/zh/docs/canvas/tool-whitelist" />
+</Cards>

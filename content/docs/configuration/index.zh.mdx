@@ -1,0 +1,123 @@
+---
+title: config.toml
+description: 智能体配置文件的位置、完整结构与一个完整示例。
+---
+
+你在界面中修改的大多数设置都保存在一个 TOML 文件 **`config.toml`** 中。你可以手动
+编辑它,[设置](/zh/docs/settings)界面也会替你写入。
+
+## 文件位置
+
+| 平台 | 路径 |
+| --- | --- |
+| **Linux** | `~/.config/nevoflux/config.toml` |
+| **macOS** | `~/Library/Application Support/nevoflux/config.toml`(若已存在 `~/.config/nevoflux/config.toml` 则回退到它) |
+| **Windows** | `%APPDATA%\nevoflux\config.toml` —— 例如 `C:\Users\<你>\AppData\Roaming\nevoflux\config.toml` |
+
+智能体首次运行时会以默认值创建该文件。所有字段都是可选的 —— 省略的字段使用默认值。
+
+> **手动编辑需要重启。** 通过设置界面所做的修改会即时生效。如果你手动编辑
+> `config.toml`,请重启 NevoFlux 以便智能体重新加载。
+
+> **`config.toml` 不是 `nevoflux config` 命令行。** `nevoflux config get/set` 命令
+> 读写的是另一个内部键值存储,*而非*本文件。要修改模型/智能体行为,请直接编辑
+> `config.toml`(或使用设置界面)。
+
+## 各节(section)
+
+| 节 | 用途 |
+| --- | --- |
+| `[llm]` | 当前提供商与通用生成设置 |
+| `[llm.<provider>]` | 各提供商的密钥、模型、Base URL |
+| `[daemon]` | 后台进程:端口、超时、并发 |
+| `[daemon.session]` | 会话上限与清理 |
+| `[daemon.context]` | 上下文窗口、历史、压缩 |
+| `[daemon.subagent]` | 子智能体并发与上限 |
+| `[storage]` | 本地 SQLite 存储 |
+| `[logging]` | 日志级别与输出 |
+| `[auth]` | 命令自动批准与敏感文件匹配 |
+| `[learning]` | 自学习流水线 |
+| `[embedding]` | 用于搜索的嵌入模型 |
+| `[knowledge_base]` / `[knowledge_base.brain]` | GBrain 知识库([详情](/zh/docs/knowledge-base)) |
+| `[tts.*]` | 语音合成 / 转写引擎 |
+
+## 关键字段
+
+### `[llm]`
+
+| 字段 | 类型 | 默认 | 含义 |
+| --- | --- | --- | --- |
+| `provider` | string | — | 当前提供商,如 `"anthropic"` |
+| `max_tokens` | int | `32768` | 每次回复的最大 token 数 |
+| `temperature` | float | `0.7` | 采样温度 |
+| `timeout_secs` | int | `120` | 请求超时 |
+| `max_retries` | int | `3` | 重试次数 |
+
+### `[llm.<provider>]`
+
+| 字段 | 类型 | 含义 |
+| --- | --- | --- |
+| `api_key` | string | 提供商 API 密钥(或使用环境变量 —— 见[提供商](/zh/docs/configuration/providers)) |
+| `model` | string | 模型 id;默认使用该提供商的默认模型 |
+| `base_url` | string | 覆盖 API 地址(代理 / 兼容服务) |
+| `context_window` | int | 覆盖模型上下文大小 |
+| `use_streaming` | bool | 流式回复(默认开启;`ollama` 为关闭) |
+
+## 完整示例
+
+```toml
+[llm]
+provider = "anthropic"
+max_tokens = 32768
+temperature = 0.7
+timeout_secs = 120
+max_retries = 3
+
+[llm.anthropic]
+# 建议用 ANTHROPIC_API_KEY 环境变量,而不是把密钥写在这里。
+api_key = "sk-ant-..."
+model = "claude-sonnet-4-20250514"
+# base_url = "https://api.anthropic.com"   # 可选
+# context_window = 200000                  # 可选
+
+[llm.openai]
+model = "gpt-4o-mini"
+# base_url = "https://my-openai-compatible-host/v1"
+
+[llm.ollama]
+model = "llama3.2"
+base_url = "http://localhost:11434"
+use_streaming = false
+
+[daemon]
+idle_timeout_secs = 1800
+keep_alive_for_mcp = true
+
+[daemon.context]
+enable_compression = true
+compression_threshold_percent = 80
+keep_recent_messages = 6
+
+[storage]
+max_size_mb = 1024
+wal_mode = true
+
+[logging]
+level = "info"
+stdout = true
+
+[embedding]
+provider = "fastembed"
+model = "multilingual-e5-small"
+enabled = true
+
+[knowledge_base]
+enabled = true
+
+[auth]
+workspace_auto_allow = true
+allowed_commands = ["cargo *", "git *", "npm *", "just *"]
+```
+
+> **把 `config.toml` 当作机密。** 它可能包含 API 密钥。NevoFlux 不使用操作系统钥匙串
+> —— 密钥保存在该文件或环境变量中。

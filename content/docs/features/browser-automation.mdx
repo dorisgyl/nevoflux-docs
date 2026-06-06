@@ -1,0 +1,38 @@
+---
+title: Browser Automation
+description: The agent drives the browser for you — navigate, click, type, read, and more.
+---
+
+The agent controls the browser through a built-in tool set, so you can ask it to
+*do* things on the web, not just answer questions.
+
+## What it can do
+
+- **Navigate** — open URLs, go back/forward.
+- **Read** — get a page's text or Markdown, and an accessibility-tree snapshot of
+  its structure.
+- **Interact** — click, type, fill fields, scroll, and upload files. It can target
+  elements by description or by a stable element id.
+- **Inspect** — find elements, query the DOM, and read element details.
+- **Tabs** — list, query, and switch between open tabs.
+- **Capture** — take screenshots.
+- **Run JS** — evaluate JavaScript on the page.
+- **Wait** — wait for elements or conditions before continuing.
+
+It also has a **smart input** engine that probes a target field, picks the best
+strategy to enter text, and verifies the result.
+
+## Examples
+
+```text
+Open Hacker News and give me the titles of the top 5 stories.
+```
+
+```text
+Fill the signup form on this page with my details from my User profile, but stop
+before submitting so I can review it.
+```
+
+> Browser actions respect your [permission setting](/docs/features). With *Confirm
+> before actions*, you approve each step; with *Auto-execute*, the agent proceeds on
+> its own.

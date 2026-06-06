@@ -1,0 +1,47 @@
+---
+title: GBrain Overview
+description: A local, private "second brain" the agent can write to and recall from.
+---
+
+**GBrain** is NevoFlux's knowledge base — a local, private store of your notes,
+pages, and facts that the agent can capture into and recall from. Everything stays on
+your machine.
+
+## How it works
+
+GBrain runs as a local background tool that the agent talks to. Pages are stored as
+**Markdown files** with a vector + keyword index for search, so the agent can find
+things by meaning, not just exact words.
+
+Each page follows a simple model:
+
+- A distilled **"compiled truth"** at the top — the durable, current summary.
+- An append-only, newest-first **timeline** below a `---` separator — dated entries
+  of what happened or was added.
+
+## Enable it
+
+GBrain is off until you turn it on. Open
+[Settings → Knowledge Base](/docs/settings/knowledge-base) and click **Enable
+Knowledge Base**. The wizard installs the runtime, initializes your brain, and starts
+the server. When the **Server** badge reads *ready*, you're set.
+
+## Browse it
+
+Open **`nevoflux://brain`** to browse your pages directly in the browser.
+
+## Where your data lives
+
+Your knowledge base lives in **`~/.gbrain/`**:
+
+- `atlas/**/*.md` — your pages (the source of truth; a page's slug is its path).
+- `journal/` — an append-only log.
+- `brain.pglite/` — the local search database (vector + keyword).
+
+Configuration is under `[knowledge_base]` / `[knowledge_base.brain]` in
+[`config.toml`](/docs/configuration).
+
+## Use it
+
+Capture, recall, synthesize, and maintain your knowledge with the brain skills. See
+**[Using GBrain](/docs/knowledge-base/using-gbrain)**.

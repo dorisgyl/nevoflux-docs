@@ -3,14 +3,47 @@ title: FAQ
 description: Frequently asked questions about NevoFlux.
 ---
 
-## Is NevoFlux free?
+## How do I open the AI sidebar?
 
-Details about pricing and availability will be published here.
+Press **`Ctrl+Shift+A`** (**`Cmd+Shift+A`** on macOS) to toggle it. The shortcut is
+listed under [Settings → Shortcuts](/docs/settings/shortcuts).
 
-## Which platforms are supported?
+## Do I need to install the agent separately?
 
-Windows, macOS, and Linux. See [Installation](/docs/getting-started/installation).
+No. The agent is bundled inside the browser and started automatically. You only need
+to [configure an AI model](/docs/getting-started/configure-ai-model).
 
-## How is my data handled?
+## Which AI providers are supported?
 
-See the [Security](/docs/security) page.
+Many — Anthropic, OpenAI, DeepSeek, Qwen, Gemini, Groq, OpenRouter, Mistral,
+xAI/Grok, Cohere, Perplexity, Together, Ollama (local), and the CLI/agent providers
+Claude Code, Gemini CLI, Kimi Agent, and OpenClaw. See the full table in
+[Providers & API keys](/docs/configuration/providers).
+
+## Where do I put my API key?
+
+In [Settings → AI Models](/docs/settings/ai-models), or as an environment variable,
+or in `[llm.<provider>]` in [`config.toml`](/docs/configuration). NevoFlux does not
+use an OS keychain.
+
+## Where is the config file?
+
+`~/.config/nevoflux/config.toml` (Linux), `~/Library/Application Support/nevoflux/config.toml`
+(macOS), or `%APPDATA%\nevoflux\config.toml` (Windows). See
+[Configuration](/docs/configuration).
+
+## I edited config.toml but nothing changed.
+
+Changes made in the Settings UI apply immediately; hand edits to `config.toml`
+require a restart. Also note that the `nevoflux config` CLI edits a separate store,
+**not** `config.toml`.
+
+## Why won't the agent control my mouse/keyboard on Linux?
+
+Wayland blocks synthetic input for security. Run your session under X11 (or
+XWayland). See [Computer control](/docs/features/computer-control).
+
+## Is my data private?
+
+Your sessions, knowledge base, and keys stay on your machine. Requests to an LLM
+provider go to that provider. See [Security](/docs/security).

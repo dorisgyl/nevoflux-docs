@@ -1,0 +1,55 @@
+---
+title: 使用 GBrain
+description: 用 brain 系列技能捕获、回忆、综合与维护你的知识。
+---
+
+你通过五个技能使用 GBrain。每个都是斜杠命令;智能体会为你选择合适的知识库工具。
+
+## Capture —— 保存内容
+
+用 [`/brain-capture`](/zh/docs/skills/built-in-skills#brain-capture) 归档知识。它会
+检查是否已有页面,把持久事实并入页面的 *compiled truth*,追加一条带日期的时间线条目,
+并打标签/建立链接。
+
+```text
+/brain-capture 保存这篇关于 Acme 定价的文章
+```
+
+它还能摄入 PDF 与办公文档、视频字幕和图片。
+
+## Recall —— 找回你知道的
+
+用 [`/brain-recall`](/zh/docs/skills/built-in-skills#brain-recall) 读回知识。它会搜索
+与查询页面、回忆事实、呈现最近或值得注意的内容,并跟随链接与时间线。它是只读的,并会
+注明所引用的页面。
+
+```text
+/brain-recall 我对 Jane Doe 了解些什么?
+```
+
+## Think —— 串联线索
+
+用 [`/brain-think`](/zh/docs/skills/built-in-skills#brain-think) 做综合:跨多页的
+多跳、带引用的回答,"谁懂 X",随时间的趋势,以及图遍历。
+
+```text
+/brain-think 总结我今年对远程办公看法的变化
+```
+
+## Care —— 保持健康
+
+用 [`/brain-care`](/zh/docs/skills/built-in-skills#brain-care) 维护知识库:健康/体检
+报告、统计、查找矛盾或孤立页、重新同步索引、恢复软删除的页面,或回退错误编辑。它绝不
+自行改写或删除。
+
+```text
+/brain-care 做一次健康检查并同步索引
+```
+
+## 浏览与分享
+
+- 在 `nevoflux://brain` **浏览**所有页面。
+- **分享**加密的页面包,也可导入他人分享给你的。
+
+> 提示:阅读任意网页时,`/brain-capture 保存这个页面` 即可存下以便日后回忆。几天后,
+> `/brain-recall` 便能按语义找到它。

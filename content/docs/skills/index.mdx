@@ -1,0 +1,52 @@
+---
+title: Skills
+description: Reusable agent capabilities defined in Markdown, invoked with a slash command or automatically.
+---
+
+A **skill** is a reusable capability packaged as a Markdown file with YAML
+frontmatter. Skills teach the agent how to do a specific kind of task and which
+tools it may use.
+
+## Invoking a skill
+
+There are two ways:
+
+- **Explicitly** with a slash command — type `/<skill> <your request>`:
+
+  ```text
+  /app a kanban board with three columns
+  ```
+
+- **Automatically** — if your request matches a skill's description, the agent loads
+  it on its own. (The sidebar also offers a slash-command picker.)
+
+## How skills load (progressive disclosure)
+
+Skills are loaded in layers so they don't bloat the context:
+
+1. **List** — every skill's name + description is always available.
+2. **Load** — the full skill body is read on demand when invoked.
+3. **Resources** — bundled scripts, references, and assets are read/run only when
+   needed.
+
+## Tool discovery: `tool_search` and `tool_call_dynamic`
+
+The agent has two meta-tools for reaching tools that aren't in its base set:
+
+- **`tool_search`** — keyword-search available tools (across MCP servers and the
+  knowledge base) to find the right one.
+- **`tool_call_dynamic`** — invoke a tool discovered that way.
+
+This is how skills like `/brain` reach the knowledge-base tools without bundling
+them up front.
+
+## Allowed tools (the skill gate)
+
+A skill can declare `allowed_tools` in its frontmatter. Before a skill loads,
+NevoFlux checks those tools are actually available; if not, it refuses to run the
+skill rather than fail mid-task.
+
+<Cards>
+  <Card title="Built-in skills" href="/docs/skills/built-in-skills" />
+  <Card title="Write your own" href="/docs/skills/authoring" />
+</Cards>

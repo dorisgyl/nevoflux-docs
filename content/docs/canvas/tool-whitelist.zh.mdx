@@ -1,0 +1,102 @@
+---
+title: 工具白名单
+description: 精确定义 Canvas 与智能体可运行哪些外部命令和内部 API。
+---
+
+**工具白名单**是你安全扩展 Canvas 应用(以及智能体)可运行内容的方式。每个工具是一个
+TOML 文件,声明一个命令(或内部 API)、它的参数,以及严格的约束。任何东西都不经过
+shell,且每个参数都会被校验。
+
+## 工具位置与优先级
+
+用户工具是 `~/.config/nevoflux/canvas-tools/` 下的 TOML 文件(在
+[设置 → Canvas Tools](/zh/docs/settings/canvas-tools)中管理)。注册表分三层,优先级
+递增:
+
+**Builtin(内置) → User(用户) → Session(会话)**
+
+同名的用户工具覆盖内置工具;会话工具覆盖前两者。只有**已启用**的工具才能被调用。列表
+会热重载,因此新加的文件无需重启即可生效。
+
+## TOML 结构
+
+| 键 | 含义 |
+| --- | --- |
+| `name` | 工具名(调用时使用),如 `"ffmpeg.trim"` |
+| `description` | 它做什么 |
+| `kind` | `"command"`(运行二进制)或 `"internal"`(调用内置 API) |
+| `binary` | 可执行文件,用于 `kind = "command"` |
+| `api` | 内部 API 名,用于 `kind = "internal"` |
+| `args_mode` | `"template"`(固定参数模板)或 `"free"`(子命令白名单) |
+| `args` | 参数模板;使用 `{{param}}` 占位符 |
+| `allowed_subcommands` | `free` 模式下:仅允许的子命令 |
+| `[params.<name>]` | 参数规格(见下) |
+| `[constraints]` | 执行限制 |
+| `enabled` | 工具是否启用(默认 `true`) |
+
+### 参数类型(`[params.<name>] type = ...`)
+
+`path`(带 `allowed_prefix`)、`duration`、`int`(`min`/`max`)、`float`
+(`min`/`max`)、`bool`、`enum`(`values`)、`text`(带 `pattern` 正则)和
+`identifier`。每个参数还可设置 `optional` 与 `default`。
+
+### 约束(constraints)
+
+`timeout_seconds`(默认 60)、`cwd`、`max_stdout_bytes` 与 `max_stderr_bytes`
+(各默认 1 MiB)。占位符 `$SESSION_DIR` 在运行时展开为当前会话的工作目录。
+
+## 示例:模板命令
+
+```toml
+name = "ffmpeg.trim"
+description = "把视频/音频文件裁剪到某个时间范围"
+kind = "command"
+binary = "ffmpeg"
+args_mode = "template"
+args = ["-y", "-i", "{{input}}", "-ss", "{{start}}", "-to", "{{end}}", "-c", "copy", "{{output}}"]
+
+[params.input]
+type = "path"
+allowed_prefix = "$SESSION_DIR"
+
+[params.start]
+type = "text"
+pattern = "^[0-9]+([.][0-9]+)?$"
+
+[params.end]
+type = "text"
+pattern = "^[0-9]+([.][0-9]+)?$"
+
+[params.output]
+type = "path"
+allowed_prefix = "$SESSION_DIR"
+
+[constraints]
+timeout_seconds = 120
+cwd = "$SESSION_DIR"
+max_stderr_bytes = 65536
+```
+
+## 示例:free 模式白名单
+
+只允许某个二进制的几个安全子命令:
+
+```toml
+name = "git"
+kind = "command"
+binary = "git"
+args_mode = "free"
+allowed_subcommands = ["status", "log", "diff", "branch", "show", "rev-parse"]
+```
+
+## 安全模型
+
+- **无 shell** —— 直接启动二进制;没有 shell 插值。
+- **参数校验** —— 路径被限制在 `allowed_prefix` 内(禁止穿越),文本须匹配其
+  `pattern`,枚举/数值会做范围检查。
+- **限制** —— 每个工具有超时与输出上限。
+- **审计** —— 每次调用都会在本地记录。
+
+> 在应用中用
+> [`NevofluxSDK.tool.invoke(name, params)`](/zh/docs/canvas/sdk) 运行工具。智能体
+> 也通过同一份白名单运行它们。

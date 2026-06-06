@@ -1,0 +1,51 @@
+---
+title: Canvas
+description: A live runtime for interactive apps, documents, diagrams, and video the agent builds.
+---
+
+**Canvas** is NevoFlux's runtime for rich, interactive output. When you ask the agent
+to build something — a dashboard, a calculator, a chart, a diagram, slides, or a
+video — it generates a Canvas artifact that opens in its own tab and runs live.
+
+## Creating a canvas
+
+Just ask, or use the [`app` skill](/docs/skills/built-in-skills#app):
+
+```text
+/app a markdown editor with live preview
+```
+
+The agent generates the artifact and opens it at `nevoflux://canvas/{id}`. You can
+also open saved artifacts from [Settings → My Canvas](/docs/settings/my-canvas).
+
+## What a canvas can be
+
+- **HTML app** — a single-page app.
+- **Multi-file project** — React, Vue, or Svelte, bundled automatically (esbuild).
+- **Markdown**, **SVG**, **Mermaid diagrams**, slides.
+- **Video compositions** — rendered to MP4 (see the [`video` skill](/docs/skills/built-in-skills#video)).
+
+Artifacts run in a **sandboxed iframe** for safety.
+
+## Working with a canvas
+
+The toolbar lets you:
+
+- Switch between **Preview** and **Edit** (a code editor).
+- **Copy** the source.
+- **Export** to many formats — Source, HTML, PNG, PDF, DOCX, SVG, Markdown, PPTX,
+  XLSX, or a ZIP of the project.
+- **Share** the artifact (end-to-end encrypted), and import a shared one via
+  `nevoflux://import/{share_id}`.
+
+## Build apps that talk to the agent
+
+Canvas apps can call back into NevoFlux — chat with the agent, store data, publish
+events, and run whitelisted tools — through the **[NevoFlux SDK](/docs/canvas/sdk)**.
+The set of tools an app may run is governed by the
+**[tool whitelist](/docs/canvas/tool-whitelist)**.
+
+<Cards>
+  <Card title="NevoFlux SDK" href="/docs/canvas/sdk" />
+  <Card title="Tool whitelist" href="/docs/canvas/tool-whitelist" />
+</Cards>

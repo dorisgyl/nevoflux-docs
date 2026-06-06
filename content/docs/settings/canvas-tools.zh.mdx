@@ -1,0 +1,30 @@
+---
+title: Canvas Tools(Canvas 工具)
+description: 管理 Canvas 应用与智能体被允许运行的工具白名单。
+---
+
+**Canvas Tools** 标签页管理 NevoFlux 的**工具白名单** —— 即 [Canvas](/zh/docs/canvas)
+应用(以及智能体)可调用的一组外部命令和内部 API。工具以 TOML 定义。
+
+## 列表
+
+每个工具会显示一个**来源(source)**徽标:
+
+- `builtin` —— 随 NevoFlux 内置
+- `user` —— 你创建的
+- `mcp` / `canvas` / `wasm` —— 由其他子系统提供
+- `overridden` —— 你替换过的内置工具
+
+每个工具都有**启用**开关。只有 **`user`** 工具才有 **Edit** / **Delete** 按钮。
+
+## 添加工具
+
+点击 **+ New Canvas Tool** 打开预填模板的 TOML 编辑器。定义工具(名称、它封装什么、
+参数、约束)后 **Save**。它会以 `user` 徽标出现,你的应用和智能体即可调用它。
+
+*示例:* 把一个 shell 程序封装为 `command` 工具,并限制为几个安全的子命令。用户工具
+保存为 `.toml` 文件,位于 `~/.config/nevoflux/canvas-tools/`。
+
+完整的 TOML 结构(参数类型、`args_mode`、约束、`{{param}}` 模板语法、Builtin/User/
+Session 三层优先级,以及安全模型)见
+**[Canvas → 工具白名单](/zh/docs/canvas/tool-whitelist)**。

@@ -1,0 +1,37 @@
+---
+title: AI Models(AI 模型)
+description: 配置 LLM 提供商 —— 密钥、模型、Base URL,以及当前提供商。
+---
+
+**AI Models** 标签页(`nevoflux://settings/llm`)用于连接 LLM 提供商。这也是首次运行
+设置引导带你前往的标签页。
+
+## 布局
+
+提供商以卡片形式分为两组展示:
+
+- **LLM Providers** —— 云端 API(Anthropic、OpenAI、DeepSeek、Qwen、Gemini、Groq、
+  OpenRouter、Mistral、xAI/Grok、Cohere、Perplexity、Together)和 **local**(Ollama)。
+- **Agents** —— 命令行/智能体类提供商(Claude Code、Gemini CLI、Kimi Agent、OpenClaw)。
+
+当前提供商的卡片会显示 **Active** 徽标;已配置的卡片会显示对勾。
+
+## 配置提供商
+
+点击卡片打开 **Configure Provider** 对话框:
+
+| 字段 | 说明 |
+| --- | --- |
+| **API Key** | 保存到 `config.toml`;设置后显示 "configured" |
+| **Model** | 可选;提示中会显示该提供商的默认模型 |
+| **Base URL** | 可选;用于代理 / 兼容端点(CLI 类提供商会隐藏此项) |
+| **Set as active provider** | 设为智能体使用的提供商 |
+
+保存会把 `[llm.<provider>]`(`api_key`、`model`、`base_url`)写入
+[`config.toml`](/zh/docs/configuration);若勾选则设为当前提供商。
+
+*示例:* 点击 **Anthropic**,粘贴密钥,可选地把模型设为 `claude-sonnet-4-20250514`,
+勾选 **Set as active provider**,**保存**。侧边栏即可开始回答。
+
+提供商完整列表及可替代写入此处的环境变量,见
+[配置 → 提供商与 API 密钥](/zh/docs/configuration/providers)。

@@ -1,0 +1,35 @@
+---
+title: Computer Control
+description: Beyond the browser — the agent can use your mouse, keyboard, and screen.
+---
+
+In addition to the browser, the agent can control your **computer**: take
+screenshots and move/click the mouse and type on the keyboard. This lets it operate
+apps outside the browser when needed.
+
+## Capabilities
+
+Screenshot, mouse move / click / down / up, drag, scroll, type text, key presses,
+hold key, read cursor position, and wait.
+
+## Platform support
+
+Computer control depends on your operating system:
+
+| Capability | Linux (X11) | Linux (Wayland) | macOS | Windows |
+| --- | --- | --- | --- | --- |
+| Screenshot | Yes | Portal only | Yes | Yes |
+| Mouse | Yes | No (security) | Yes | Yes |
+| Keyboard | Yes | No (security) | Yes | Yes |
+| Multi-monitor | Yes | Limited | Yes | Yes |
+
+Notes:
+
+- **Linux/Wayland** blocks synthetic input for security. For full control, run the
+  session under **X11** (or XWayland).
+- **macOS** requires granting **Accessibility** permission (System Settings →
+  Privacy & Security → Accessibility) before mouse/keyboard control works.
+- **Windows** is fully supported.
+
+> Browser tasks don't need these permissions — they go through the browser. Computer
+> control is for driving things *outside* the browser.

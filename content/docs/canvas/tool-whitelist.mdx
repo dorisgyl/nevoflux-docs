@@ -1,0 +1,105 @@
+---
+title: Tool Whitelist
+description: Define exactly which external commands and internal APIs Canvas and the agent may run.
+---
+
+The **tool whitelist** is how you safely extend what Canvas apps (and the agent) can
+run. Each tool is a TOML file that declares a command (or internal API), its
+parameters, and strict constraints. Nothing runs through a shell, and every
+parameter is validated.
+
+## Where tools live, and precedence
+
+User tools are TOML files in `~/.config/nevoflux/canvas-tools/` (manage them in
+[Settings → Canvas Tools](/docs/settings/canvas-tools)). The registry has three
+layers, in increasing priority:
+
+**Builtin → User → Session**
+
+A user tool overrides a builtin of the same name; a session tool overrides both.
+Only **enabled** tools can be invoked. The list hot-reloads, so a newly added file
+is picked up without restarting.
+
+## TOML schema
+
+| Key | Meaning |
+| --- | --- |
+| `name` | Tool name (how it's invoked), e.g. `"ffmpeg.trim"` |
+| `description` | What it does |
+| `kind` | `"command"` (runs a binary) or `"internal"` (calls a built-in API) |
+| `binary` | The executable, for `kind = "command"` |
+| `api` | The internal API name, for `kind = "internal"` |
+| `args_mode` | `"template"` (fixed arg template) or `"free"` (subcommand allowlist) |
+| `args` | Arg template; use `{{param}}` placeholders |
+| `allowed_subcommands` | For `free` mode: the only sub-commands permitted |
+| `[params.<name>]` | A parameter spec (see below) |
+| `[constraints]` | Execution limits |
+| `enabled` | Whether the tool is active (default `true`) |
+
+### Parameter types (`[params.<name>] type = ...`)
+
+`path` (with `allowed_prefix`), `duration`, `int` (`min`/`max`), `float`
+(`min`/`max`), `bool`, `enum` (`values`), `text` (with a `pattern` regex), and
+`identifier`. Each param may also set `optional` and `default`.
+
+### Constraints
+
+`timeout_seconds` (default 60), `cwd`, `max_stdout_bytes` and `max_stderr_bytes`
+(default 1 MiB each). The token `$SESSION_DIR` is expanded at runtime to the current
+session's working directory.
+
+## Example: a templated command
+
+```toml
+name = "ffmpeg.trim"
+description = "Trim a video/audio file to a time range"
+kind = "command"
+binary = "ffmpeg"
+args_mode = "template"
+args = ["-y", "-i", "{{input}}", "-ss", "{{start}}", "-to", "{{end}}", "-c", "copy", "{{output}}"]
+
+[params.input]
+type = "path"
+allowed_prefix = "$SESSION_DIR"
+
+[params.start]
+type = "text"
+pattern = "^[0-9]+([.][0-9]+)?$"
+
+[params.end]
+type = "text"
+pattern = "^[0-9]+([.][0-9]+)?$"
+
+[params.output]
+type = "path"
+allowed_prefix = "$SESSION_DIR"
+
+[constraints]
+timeout_seconds = 120
+cwd = "$SESSION_DIR"
+max_stderr_bytes = 65536
+```
+
+## Example: a free-mode allowlist
+
+Allow only a few safe sub-commands of a binary:
+
+```toml
+name = "git"
+kind = "command"
+binary = "git"
+args_mode = "free"
+allowed_subcommands = ["status", "log", "diff", "branch", "show", "rev-parse"]
+```
+
+## Safety model
+
+- **No shell** — binaries are spawned directly; there is no shell interpolation.
+- **Validated params** — paths are confined to `allowed_prefix` (no traversal),
+  text must match its `pattern`, enums/numbers are range-checked.
+- **Limits** — per-tool timeout and output caps.
+- **Audit** — every invocation is recorded locally.
+
+> From an app, run a tool with
+> [`NevofluxSDK.tool.invoke(name, params)`](/docs/canvas/sdk). The agent runs them
+> through the same whitelist.

@@ -1,0 +1,45 @@
+---
+title: 配置 AI 模型
+description: 安装后第一件事 —— 选择提供商并填入 API 密钥。
+---
+
+在智能体工作之前,你必须先配置一个 **AI 模型**。这是安装后要做的第一件事。
+
+## 1. 打开侧边栏
+
+按 **`Ctrl+Shift+A`**(macOS 为 **`Cmd+Shift+A`**)切换 AI 侧边栏。
+
+> 这是**显示/隐藏智能体侧边栏**的全局快捷键。你随时可在
+> [设置 → 快捷键](/zh/docs/settings/shortcuts) 中查看它。如果侧边栏没有打开,
+> 点击工具栏上的 NevoFlux 侧边栏按钮,或再次按该快捷键来切换。
+
+首次运行时(尚未配置任何提供商),侧边栏会显示 **Welcome to NevoFlux** 欢迎界面,
+其中的 **Start Setup** 按钮会直接带你进入模型设置。
+
+## 2. 选择提供商并填入密钥
+
+该按钮会打开 **`nevoflux://settings/llm`**(设置中的 **AI Models** 标签页)。你也可以
+随时通过 **`Ctrl+Shift+A`** → 齿轮图标,或访问 `nevoflux://settings` 并选择
+**AI Models** 来打开它。
+
+在 AI Models 标签页中:
+
+1. 点击你想用的提供商卡片(如 **Anthropic**、**OpenAI**、**DeepSeek**、**Qwen** 等)。
+2. 粘贴你的 **API Key**。
+3.(可选)填写具体的 **Model** 和自定义 **Base URL**。
+4. 勾选 **Set as active provider**(设为当前提供商)。
+5. **保存**。
+
+保存会把该提供商的设置写入你的 `config.toml`(`[llm.<provider>]`)并将其设为当前
+提供商。侧边栏检测到新提供商后,会自动从欢迎界面切换到聊天界面。
+
+支持的提供商完整列表、各自的默认模型,以及可替代写入文件的环境变量,见
+[配置 → 提供商与 API 密钥](/zh/docs/configuration/providers)。
+
+## 3. 准备就绪
+
+打开侧边栏,向智能体下达任务吧。继续阅读
+[开始对话](/zh/docs/getting-started/first-conversation)。
+
+> **没有钥匙串(keyring)。** API 密钥从你的 `config.toml` 或环境变量中读取 ——
+> NevoFlux 不会把它们存入操作系统的钥匙串。请把 `config.toml` 当作机密文件对待。

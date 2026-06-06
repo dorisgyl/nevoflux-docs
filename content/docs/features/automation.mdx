@@ -1,0 +1,39 @@
+---
+title: Automation, Memory & Voice
+description: Recurring loops, long-term memory, self-learning, web tools, and speech.
+---
+
+Beyond a single conversation, the agent has capabilities that persist and extend
+across sessions.
+
+## Loops (recurring tasks)
+
+The agent can run a prompt (or a skill) on a recurring schedule with the **loop**
+tools — create a loop, list active loops, cancel one, and persist small state in a
+per-loop scratchpad. See the [`loop` skill](/docs/skills/built-in-skills#loop).
+
+*Example:* "every 30 minutes, check this page and notify me if the price drops."
+
+## Memory & self-learning
+
+- **Memory tools** let the agent store, search, update, and delete notes it should
+  remember.
+- A **self-learning** pipeline observes your sessions and, over time, proposes
+  durable updates to the agent's persona ("soul") files — only after enough
+  confirming evidence. You stay in control of those files in
+  [Settings → General](/docs/settings/general).
+
+For a full, browsable knowledge base, see [GBrain](/docs/knowledge-base).
+
+## Web tools
+
+The agent has **web search** and **web fetch** tools for pulling in information from
+the open web independently of the page you're on.
+
+## Voice (TTS / STT)
+
+NevoFlux includes text-to-speech and transcription:
+
+- **ElevenLabs** (cloud TTS), **Kokoro** (local TTS), and **Whisper**
+  (speech-to-text). Configure voices/keys under the `[tts.*]` sections of
+  [`config.toml`](/docs/configuration).
