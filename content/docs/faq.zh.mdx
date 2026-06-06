@@ -26,6 +26,22 @@ Claude Code、Gemini CLI、Kimi Agent 和 OpenClaw。完整表格见
 [`config.toml`](/zh/docs/configuration) 的 `[llm.<provider>]`。NevoFlux 不使用操作
 系统钥匙串。
 
+## 如何配置 LLM 提供商与 agents?
+
+在地址栏输入 **`nevoflux://settings`** 并进入 **AI Models**。你会看到两组:
+**LLM Providers**(云端 API 与本地模型)和 **Agents**(编码智能体与个人助手)。点击
+任意卡片即可配置其 API 密钥与设置。见[设置 → AI Models](/zh/docs/settings/ai-models)。
+
+## 如何接入 Claude Code 作为编码智能体?
+
+先全局安装 Claude Code 的 ACP 适配器:
+
+```bash
+npm install -g @agentclientprotocol/claude-agent-acp
+```
+
+然后进入 **`nevoflux://settings`** → **AI Models** → 点击 **Claude Code** 卡片并配置。
+
 ## 配置文件在哪里?
 
 `~/.config/nevoflux/config.toml`(Linux)、
