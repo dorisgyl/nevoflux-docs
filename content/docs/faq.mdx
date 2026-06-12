@@ -6,24 +6,24 @@ description: Frequently asked questions about NevoFlux.
 ## How do I open the AI sidebar?
 
 Press **`Ctrl+Shift+A`** (**`Cmd+Shift+A`** on macOS) to toggle it. The shortcut is
-listed under [Settings → Shortcuts](/docs/settings/shortcuts).
+listed under [Settings → Shortcuts](/en/docs/settings/shortcuts).
 
 ## Do I need to install the agent separately?
 
 No. The agent is bundled inside the browser and started automatically. You only need
-to [configure an AI model](/docs/getting-started/configure-ai-model).
+to [configure an AI model](/en/docs/getting-started/configure-ai-model).
 
 ## Which AI providers are supported?
 
 Many — Anthropic, OpenAI, DeepSeek, Qwen, Gemini, Groq, OpenRouter, Mistral,
 xAI/Grok, Cohere, Perplexity, Together, Ollama (local), and the CLI/agent providers
 Claude Code, Gemini CLI, Kimi Agent, and OpenClaw. See the full table in
-[Providers & API keys](/docs/configuration/providers).
+[Providers & API keys](/en/docs/configuration/providers).
 
 ## Where do I put my API key?
 
-In [Settings → AI Models](/docs/settings/ai-models), or as an environment variable,
-or in `[llm.<provider>]` in [`config.toml`](/docs/configuration). NevoFlux does not
+In [Settings → AI Models](/en/docs/settings/ai-models), or as an environment variable,
+or in `[llm.<provider>]` in [`config.toml`](/en/docs/configuration). NevoFlux does not
 use an OS keychain.
 
 ## How do I configure LLM providers and agents?
@@ -31,7 +31,7 @@ use an OS keychain.
 Type **`nevoflux://settings`** in the address bar and go to **AI Models**. You'll see
 two groups: **LLM Providers** (cloud APIs and local models) and **Agents** (coding
 agents and personal assistants). Click any card to configure its API key and
-settings. See [Settings → AI Models](/docs/settings/ai-models).
+settings. See [Settings → AI Models](/en/docs/settings/ai-models).
 
 ## How do I connect Claude Code as a coding agent?
 
@@ -48,7 +48,7 @@ and configure it.
 
 `~/.config/nevoflux/config.toml` (Linux), `~/Library/Application Support/nevoflux/config.toml`
 (macOS), or `%APPDATA%\nevoflux\config.toml` (Windows). See
-[Configuration](/docs/configuration).
+[Configuration](/en/docs/configuration).
 
 ## I edited config.toml but nothing changed.
 
@@ -59,9 +59,9 @@ require a restart. Also note that the `nevoflux config` CLI edits a separate sto
 ## Why won't the agent control my mouse/keyboard on Linux?
 
 Wayland blocks synthetic input for security. Run your session under X11 (or
-XWayland). See [Computer control](/docs/features/computer-control).
+XWayland). See [Computer control](/en/docs/features/computer-control).
 
 ## Is my data private?
 
 Your sessions, knowledge base, and keys stay on your machine. Requests to an LLM
-provider go to that provider. See [Security](/docs/security).
+provider go to that provider. See [Security](/en/docs/security).

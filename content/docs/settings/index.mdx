@@ -7,14 +7,14 @@ Open settings at **`nevoflux://settings`** (or via the gear in the sidebar). It 
 eight tabs:
 
 <Cards>
-  <Card title="General" href="/docs/settings/general" />
-  <Card title="AI Models" href="/docs/settings/ai-models" />
-  <Card title="MCP Servers" href="/docs/settings/mcp-servers" />
-  <Card title="Canvas Tools" href="/docs/settings/canvas-tools" />
-  <Card title="My Canvas" href="/docs/settings/my-canvas" />
-  <Card title="Knowledge Base" href="/docs/settings/knowledge-base" />
-  <Card title="Packs" href="/docs/settings/packs" />
-  <Card title="Shortcuts" href="/docs/settings/shortcuts" />
+  <Card title="General" href="/en/docs/settings/general" />
+  <Card title="AI Models" href="/en/docs/settings/ai-models" />
+  <Card title="MCP Servers" href="/en/docs/settings/mcp-servers" />
+  <Card title="Canvas Tools" href="/en/docs/settings/canvas-tools" />
+  <Card title="My Canvas" href="/en/docs/settings/my-canvas" />
+  <Card title="Knowledge Base" href="/en/docs/settings/knowledge-base" />
+  <Card title="Packs" href="/en/docs/settings/packs" />
+  <Card title="Shortcuts" href="/en/docs/settings/shortcuts" />
 </Cards>
 
 You can deep-link to a tab, e.g. `nevoflux://settings/llm` opens **AI Models**.
@@ -27,12 +27,12 @@ NevoFlux registers a custom `nevoflux://` URL scheme for its built-in pages:
 | --- | --- |
 | `nevoflux://home` | New-tab / home page |
 | `nevoflux://settings` | Settings (this page) |
-| `nevoflux://canvas/{id}` | Open a [Canvas](/docs/canvas) artifact |
+| `nevoflux://canvas/{id}` | Open a [Canvas](/en/docs/canvas) artifact |
 | `nevoflux://import/{share_id}` | Import a shared Canvas |
 | `nevoflux://history` | Conversation history |
 | `nevoflux://plan/{id}` | An agent plan |
 | `nevoflux://render/{job}` | A render job's output |
-| `nevoflux://brain` | Browse your [Knowledge Base](/docs/knowledge-base) |
+| `nevoflux://brain` | Browse your [Knowledge Base](/en/docs/knowledge-base) |
 
 ## How settings are stored
 
@@ -41,11 +41,11 @@ The Settings UI writes to three places, all under your config directory:
 - **UI preferences** (sidebar behavior, MCP connection options, …) — saved
   automatically as you change them.
 - **`config.toml`** — the AI Models tab writes provider keys/models here. See
-  [Configuration](/docs/configuration).
+  [Configuration](/en/docs/configuration).
 - **Markdown "soul" files** (`IDENTITY.md`, `SOUL.md`, `USER.md`, `TOOLS.md`,
   `AGENTS.md`) — the General tab edits these; click **Save All Settings** to write
-  them. See [General](/docs/settings/general).
+  them. See [General](/en/docs/settings/general).
 
-Other tabs (MCP servers, Canvas tools, Knowledge Base, [Packs](/docs/settings/packs))
+Other tabs (MCP servers, Canvas tools, Knowledge Base, [Packs](/en/docs/settings/packs))
 talk to the agent directly to manage servers, tools, the knowledge base, and installed
 packs.

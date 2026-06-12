@@ -145,7 +145,7 @@ files = ["components/canvas-tools/pdf-render.toml"]
 external_binaries = ["weasyprint"]   # 可选:由 `pack status` 探测;扩展包从不执行它
 ```
 
-每个文件都是一份[白名单 TOML 工具定义](/docs/canvas/tool-whitelist),复制到
+每个文件都是一份[白名单 TOML 工具定义](/zh/docs/canvas/tool-whitelist),复制到
 `~/.config/nevoflux/canvas-tools/<basename>`,并由 canvas 工具加载器按需重新扫描(无需重启)。
 声明 `external_binaries` 是为了让 `pack status` 能提示用户“未找到 weasyprint —— 请安装它”;
 扩展包引擎从不运行它们。

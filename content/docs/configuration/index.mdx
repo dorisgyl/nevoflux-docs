@@ -4,7 +4,7 @@ description: Where the agent's config file lives, its full schema, and a complet
 ---
 
 Most settings you change in the UI are stored in a single TOML file,
-**`config.toml`**. You can edit it by hand, and the [Settings](/docs/settings) UI
+**`config.toml`**. You can edit it by hand, and the [Settings](/en/docs/settings) UI
 writes to it for you.
 
 ## Where it lives
@@ -42,7 +42,7 @@ optional — anything you omit uses its default.
 | `[auth]` | Command auto-approval and sensitive-file patterns |
 | `[learning]` | Self-learning pipeline |
 | `[embedding]` | Embedding model for search |
-| `[knowledge_base]` / `[knowledge_base.brain]` | GBrain knowledge base ([details](/docs/knowledge-base)) |
+| `[knowledge_base]` / `[knowledge_base.brain]` | GBrain knowledge base ([details](/en/docs/knowledge-base)) |
 | `[tts.*]` | Text-to-speech / transcription engines |
 
 ## Key fields
@@ -61,7 +61,7 @@ optional — anything you omit uses its default.
 
 | Field | Type | Meaning |
 | --- | --- | --- |
-| `api_key` | string | Provider API key (or use an env var — see [Providers](/docs/configuration/providers)) |
+| `api_key` | string | Provider API key (or use an env var — see [Providers](/en/docs/configuration/providers)) |
 | `model` | string | Model id; defaults to the provider's default |
 | `base_url` | string | Override the API endpoint (proxies / compatible servers) |
 | `context_window` | int | Override the model's context size |

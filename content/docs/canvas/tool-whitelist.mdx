@@ -11,7 +11,7 @@ parameter is validated.
 ## Where tools live, and precedence
 
 User tools are TOML files in `~/.config/nevoflux/canvas-tools/` (manage them in
-[Settings → Canvas Tools](/docs/settings/canvas-tools)). The registry has three
+[Settings → Canvas Tools](/en/docs/settings/canvas-tools)). The registry has three
 layers, in increasing priority:
 
 **Builtin → User → Session**
@@ -101,5 +101,5 @@ allowed_subcommands = ["status", "log", "diff", "branch", "show", "rev-parse"]
 - **Audit** — every invocation is recorded locally.
 
 > From an app, run a tool with
-> [`NevofluxSDK.tool.invoke(name, params)`](/docs/canvas/sdk). The agent runs them
+> [`NevofluxSDK.tool.invoke(name, params)`](/en/docs/canvas/sdk). The agent runs them
 > through the same whitelist.

@@ -22,14 +22,14 @@ OS keychain. Treat `config.toml` as a secret file and avoid committing it anywhe
 
 By default the agent runs in **Confirm before actions** mode: it asks for your
 approval before running tools or commands. You can opt into **Auto-execute** in
-[Settings → General](/docs/settings/general) — do so deliberately.
+[Settings → General](/en/docs/settings/general) — do so deliberately.
 
 ## Tool and command safety
 
-- **Canvas tools** run through a [whitelist](/docs/canvas/tool-whitelist): no shell,
+- **Canvas tools** run through a [whitelist](/en/docs/canvas/tool-whitelist): no shell,
   validated parameters, path confinement, output/time limits, and an audit log.
 - **Command auto-approval** is governed by the `[auth]` section of
-  [`config.toml`](/docs/configuration), including an allowlist and patterns for
+  [`config.toml`](/en/docs/configuration), including an allowlist and patterns for
   sensitive files.
 - **Canvas artifacts** run in a sandboxed iframe, and the bridge between page content
   and the browser is isolated.

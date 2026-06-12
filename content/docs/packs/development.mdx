@@ -151,7 +151,7 @@ files = ["components/canvas-tools/pdf-render.toml"]
 external_binaries = ["weasyprint"]   # optional: probed by `pack status`; never executed by the pack
 ```
 
-Each file is a [whitelist TOML tool definition](/docs/canvas/tool-whitelist), copied to
+Each file is a [whitelist TOML tool definition](/en/docs/canvas/tool-whitelist), copied to
 `~/.config/nevoflux/canvas-tools/<basename>` and picked up by the canvas-tools loader
 (re-scanned on demand — no restart needed). `external_binaries` are declared so
 `pack status` can tell the user "weasyprint not found — install it"; the pack engine
